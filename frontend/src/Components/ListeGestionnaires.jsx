@@ -17,6 +17,19 @@ function ListeAdministrateurs() {
       .catch((error) => {
         console.error("Erreur lors de la récupération des administrateurs:", error);
       });
+
+          // Esc button 
+          const handleEscKeyPress = (event) => {
+            if (event.keyCode === 27) {
+              closeModal();
+            }
+          };
+      
+          window.addEventListener('keydown', handleEscKeyPress);
+      
+          return () => {
+            window.removeEventListener('keydown', handleEscKeyPress);
+          };
   }, []);
 
   const handleDelete = (id) => {
