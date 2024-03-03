@@ -16,6 +16,19 @@ function ListStagiaires() {
         setStagiaires(reversedStagiaires);
       })
       .catch((error) => console.error("Error fetching stagiaires:", error));
+
+              // Esc button 
+              const handleEscKeyPress = (event) => {
+                if (event.keyCode === 27) {
+                  closeModal();
+                }
+              };
+          
+              window.addEventListener('keydown', handleEscKeyPress);
+          
+              return () => {
+                window.removeEventListener('keydown', handleEscKeyPress);
+              };
   }, []);
 
   function formatDate(dateString) {
