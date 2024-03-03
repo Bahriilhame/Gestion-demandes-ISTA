@@ -93,9 +93,9 @@ function ListeAdministrateurs() {
             </button>
             <h2 className="text-xl font-bold mb-4">{selectedAdministrateur.nom + ' ' + selectedAdministrateur.prenom}</h2>
             <p><strong>Email:</strong> {selectedAdministrateur.email}</p>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <button onClick={closeModal} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">Fermer</button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

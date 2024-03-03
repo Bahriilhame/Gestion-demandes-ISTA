@@ -32,7 +32,7 @@ function ListStagiaires() {
   }, []);
 
   function formatDate(dateString) {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
     const date = new Date(dateString);
     const month = months[date.getMonth()];
     const day = date.getDate();
@@ -147,13 +147,13 @@ function ListStagiaires() {
             <h3 className="text-lg font-semibold mt-4 mb-2">Demandes :</h3>
             {selectedStagiaire.demandes.map((demande, index) => (
               <div key={index} className={`${getBackgroundColor(selectedStagiaire.demandes)} p-4 rounded-lg mb-4`}>
-                <p><strong>Date de Soumission:</strong> {demande.dateSoumission}</p>
+                <p><strong>Date de Soumission:</strong> {formatDate(demande.dateSoumission)}</p>
                 <p><strong>Type de Demande:</strong> {demande.typeDemande}</p>
               </div>
             ))}
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <button onClick={closeModal} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">Fermer</button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
