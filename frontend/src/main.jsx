@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import FormStagiaire from './Components/FormStagiaire';
 import ListStagiaires from './Components/ListStagiaires';
 import './index.css';
+import AddGestionnaire from './Components/AddGestionnaire';
+import ListeGestionnaires from './Components/ListeGestionnaires';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -18,8 +20,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <li className="mb-4">
               <Link to='/' className="hover:text-gray-300">Liste des stagiaires</Link>
             </li>
-            <li>
+            <li className="mb-4">
               <Link to='/AddStagiaire' className="hover:text-gray-300">Form Ajout des stagiaires</Link>
+            </li>
+            <li className="mb-4">
+              <Link to='/listGestionnaire' className="hover:text-gray-300">Liste des Gestionnaires</Link>
+            </li>
+            <li className="mb-4">
+              <Link to='/AddGestionnaire' className="hover:text-gray-300">Form Ajout des Gestionnaires</Link>
             </li>
           </ul>
         </nav>
@@ -27,6 +35,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path='/' element={<ListStagiaires />}/>
             <Route path='/AddStagiaire' element={<FormStagiaire />}/>
+            <Route path='/AddGestionnaire' element={<AddGestionnaire />}/>
+            <Route path='/listGestionnaire' element={<ListeGestionnaires />}/>
           </Routes>
         </div>
       </div>
