@@ -7,7 +7,10 @@ use App\Models\Administrateur;
 
 class AdministrateurController extends Controller
 {
-
+    public function index(){
+        $administrateurs = Administrateur::all();
+        return response()->json($administrateurs);
+    }
     public function store(Request $request)
     {
         $request->validate([
