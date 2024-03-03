@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Administrateur extends Model
 {
-    use HasFactory;
+    protected $guard = 'admin';
+
+    protected $fillable = ['nom', 'prenom', 'email', 'mdp', 'role'];
+
+    protected $hidden = ['mdp', 'remember_token'];
+
 }
