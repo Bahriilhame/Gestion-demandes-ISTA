@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/stagiaires', [StagiaireController::class, 'index']);
 Route::post('/stagiaires', [StagiaireController::class, 'store']);
+Route::delete('/stagiaires/{CIN}', [StagiaireController::class, 'destroy']);
