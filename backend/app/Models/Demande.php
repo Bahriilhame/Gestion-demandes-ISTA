@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Demande extends Model
 {
-    use HasFactory;
+    protected $fillable = ['stagiaire_id', 'dateSoumission', 'typeDemande'];
+
+    public function stagiaire(){
+        return $this->belongsTo(Stagiaire::class);
+    }
 }
