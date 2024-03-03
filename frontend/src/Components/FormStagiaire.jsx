@@ -25,7 +25,7 @@ function MultiStepForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/stagiaires', formData); // Utiliser Axios pour envoyer la requête POST
+      const response = await axios.post('http://127.0.0.1:8000/api/stagiaires', formData);
       if (response.status === 201) {
         alert('Stagiaire ajouté avec succès !');
         navigate('/')
