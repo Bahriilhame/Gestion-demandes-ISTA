@@ -51,7 +51,7 @@ function ListStagiaires() {
     : Stagiaires;
 
   const handleDelete = (cin) => {
-    axios.delete(`http://127.0.0.1:8000/api/stagiaires/${cin}`).then(() => {
+    axios.delete(`http://127.0.0.1:8000/api/DeleteStagiaires/${cin}`).then(() => {
       setStagiaires(prevStagiaires => prevStagiaires.filter(stagiaire => stagiaire.CIN !== cin));
       })
       .catch((error) => console.error("Error deleting stagiaire:", error));

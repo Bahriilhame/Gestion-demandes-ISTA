@@ -13,7 +13,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // stagiaires
 Route::get('/stagiaires', [StagiaireController::class, 'index']);
 Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
-Route::delete('/stagiaires/{CIN}', [StagiaireController::class, 'destroy']);
+Route::delete('/DeleteStagiaires/{CIN}', [StagiaireController::class, 'destroy']);
 
 // gestionnaires
 Route::post('/AddGestionnaire', [AdministrateurController::class, 'store']);
