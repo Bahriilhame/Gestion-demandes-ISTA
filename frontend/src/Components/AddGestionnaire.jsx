@@ -10,13 +10,17 @@ function AddGestionnaire() {
   const [mdp, setMdp] = useState("");
   const role = "gestionnaire";
 
+  document.title = "ISTA | Ajout gestionnaire"; 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = { nom, prenom, email, mdp, role };
     axios.post("http://127.0.0.1:8000/api/AddGestionnaire", formData)
       .then(() => {
-          alert("Gestionnaire ajouté avec succès");
-          navigate('/listGestionnaire');
+          // alert("Gestionnaire ajouté avec succès");
+          // navigate('/dashboard-directeur/listGestionnaire');
+
+          navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true } })
       })
       .catch((error) => {
         console.error("Erreur lors de l'ajout du gestionnaire:", error);

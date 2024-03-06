@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { XIcon } from '@heroicons/react/solid';
+import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+
+import { useLocation } from "react-router-dom";
+import Toast from "../Toast";
+
 
 function ListStagiaires() {
   const [Stagiaires, setStagiaires] = useState([]);
   const [selectedStagiaire, setSelectedStagiaire] = useState(null);
   const [filterType, setFilterType] = useState("");
 
+  const location = useLocation();
+  const [showNotification, setShowNotification] = useState(false);
+
   useEffect(() => {
+    setShowNotification(location.state && location.state.showNotification);
+  }, [location]);
+
+  useEffect(() => {
+    document.title = "ISTA | Liste des demandes"; 
     axios.get("http://127.0.0.1:8000/api/stagiaires")
       .then((rep) => {
         const reversedStagiaires = [...rep.data].reverse();
@@ -51,7 +63,7 @@ function ListStagiaires() {
     : Stagiaires;
 
   const handleDelete = (cin) => {
-    axios.delete(`http://127.0.0.1:8000/api/DeleteStagiaires/${cin}`).then(() => {
+    axios.delete(`http://127.0.0.1:8000/api/stagiaires/${cin}`).then(() => {
       setStagiaires(prevStagiaires => prevStagiaires.filter(stagiaire => stagiaire.CIN !== cin));
       })
       .catch((error) => console.error("Error deleting stagiaire:", error));
@@ -79,7 +91,8 @@ function ListStagiaires() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Liste des stagiaires</h1>
+      {showNotification && <Toast />} 
+      <h1 className="text-3xl font-bold mb-6">Liste des demnades</h1>
       <div className="mb-4">
         <select
           className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
