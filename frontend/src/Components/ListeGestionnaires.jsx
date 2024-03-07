@@ -115,6 +115,7 @@ import { faEye, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import Toast from "../Toast";
 import { useLocation } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
+import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline'; 
 
 function ListeAdministrateurs() {
   // const navigate=useNavigate()
@@ -202,94 +203,108 @@ function ListeAdministrateurs() {
   
 
   return (
-    <div className="container mx-auto px-4 py-8">
-            {showNotification && <Toast />} 
-      <h1 className="text-3xl font-bold mb-6">Liste des gestionnaires</h1>
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="px-4 py-2">Nom</th>
-              <th className="px-4 py-2">Prénom</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {administrateurs.map((administrateur) => (
-              <tr key={administrateur.id} className="text-gray-700">
-                <td className="border px-4 py-2">{administrateur.nom}</td>
-                <td className="border px-4 py-2">{administrateur.prenom}</td>
-                <td className="border px-4 py-2">{administrateur.email}</td>
-                <td className="border px-4 py-2">
-                  <button onClick={() => openModal(administrateur)} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2" style={{ fontSize: '0.8rem' }}>
-                    <FontAwesomeIcon icon={faEye} className="mr-2" />
-                    Modifier
-                  </button>
-                  <button onClick={() => handleDelete(administrateur.id)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" style={{ fontSize: '0.8rem' }}>
-                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                    Supprimer
-                  </button>
-                </td>
+    <div>
+        <br />
+        <div className="grid grid-cols-3 gap-4 mx-4">
+            <div className="bg-white shadow-lg p-2 rounded-lg">
+                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><DocumentTextIcon className='w-6 h-6 text-blue-800 mr-2'/>10 Demandes</h2>
+            </div>
+            <div className="bg-white shadow-lg p-2 rounded-lg">
+                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><UserIcon className='w-6 h-6 text-blue-800 mr-2'/>320 Stagiaires</h2>
+            </div>
+            <div className="bg-white shadow-lg p-2 rounded-lg">
+                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><FolderIcon className='w-6 h-6 text-blue-800 mr-2'/>1200 Total des attestations</h2>
+            </div>
+        </div>
+      <div className="container mx-auto px-4 py-8">
+              {showNotification && <Toast />} 
+        <h1 className="text-3xl font-bold mb-6">Liste des gestionnaires</h1>
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="px-4 py-2">Nom</th>
+                <th className="px-4 py-2">Prénom</th>
+                <th className="px-4 py-2">Email</th>
+                <th className="px-4 py-2">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {selectedAdministrateur && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
-            <button onClick={closeModal} className="absolute top-2 right-2">
-              <span title="Fermer">
-                <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true"/>
-              </span>
-            </button>
-            <h2 className="text-xl font-bold mb-4">Modifier les infos de {selectedAdministrateur.nom + ' ' + selectedAdministrateur.prenom}</h2>
-            <div className="mb-4">
-              <label htmlFor="modifiedNom" className="block text-sm font-semibold mb-1">Nom:</label>
-              <input
-                type="text"
-                id="modifiedNom"
-                value={modifiedNom}
-                onChange={(e) => setModifiedNom(e.target.value)}
-                className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
-                placeholder="Entrez le nom modifié"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="modifiedPrenom" className="block text-sm font-semibold mb-1">Prénom:</label>
-              <input
-                type="text"
-                id="modifiedPrenom"
-                value={modifiedPrenom}
-                onChange={(e) => setModifiedPrenom(e.target.value)}
-                className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
-                placeholder="Entrez le prénom modifié"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="modifiedEmail" className="block text-sm font-semibold mb-1">Email:</label>
-              <input
-                type="email"
-                id="modifiedEmail"
-                value={modifiedEmail}
-                onChange={(e) => setModifiedEmail(e.target.value)}
-                className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
-                placeholder="Entrez l'email modifié"
-              />
-            </div>
-            <div className="flex justify-between">
-              <button onClick={handleSave} className="mt-4 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                <FontAwesomeIcon icon={faSave} className="mr-2" />
-                Sauvegarder
+            </thead>
+            <tbody>
+              {administrateurs.map((administrateur) => (
+                <tr key={administrateur.id} className="text-gray-700">
+                  <td className="border px-4 py-2">{administrateur.nom}</td>
+                  <td className="border px-4 py-2">{administrateur.prenom}</td>
+                  <td className="border px-4 py-2">{administrateur.email}</td>
+                  <td className="border px-4 py-2">
+                    <button onClick={() => openModal(administrateur)} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2" style={{ fontSize: '0.8rem' }}>
+                      <FontAwesomeIcon icon={faEye} className="mr-2" />
+                      Modifier
+                    </button>
+                    <button onClick={() => handleDelete(administrateur.id)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" style={{ fontSize: '0.8rem' }}>
+                      <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {selectedAdministrateur && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+              <button onClick={closeModal} className="absolute top-2 right-2">
+                <span title="Fermer">
+                  <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true"/>
+                </span>
               </button>
-              <button onClick={closeModal} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-                Annuler
-              </button>
+              <h2 className="text-xl font-bold mb-4">Modifier les infos de {selectedAdministrateur.nom + ' ' + selectedAdministrateur.prenom}</h2>
+              <div className="mb-4">
+                <label htmlFor="modifiedNom" className="block text-sm font-semibold mb-1">Nom:</label>
+                <input
+                  type="text"
+                  id="modifiedNom"
+                  value={modifiedNom}
+                  onChange={(e) => setModifiedNom(e.target.value)}
+                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  placeholder="Entrez le nom modifié"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="modifiedPrenom" className="block text-sm font-semibold mb-1">Prénom:</label>
+                <input
+                  type="text"
+                  id="modifiedPrenom"
+                  value={modifiedPrenom}
+                  onChange={(e) => setModifiedPrenom(e.target.value)}
+                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  placeholder="Entrez le prénom modifié"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="modifiedEmail" className="block text-sm font-semibold mb-1">Email:</label>
+                <input
+                  type="email"
+                  id="modifiedEmail"
+                  value={modifiedEmail}
+                  onChange={(e) => setModifiedEmail(e.target.value)}
+                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  placeholder="Entrez l'email modifié"
+                />
+              </div>
+              <div className="flex justify-between">
+                <button onClick={handleSave} className="mt-4 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+                  <FontAwesomeIcon icon={faSave} className="mr-2" />
+                  Sauvegarder
+                </button>
+                <button onClick={closeModal} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+                  Annuler
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

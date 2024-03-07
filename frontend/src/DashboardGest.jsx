@@ -5,7 +5,7 @@ import './index.css';
 
 function DashboardGest() {
   return (
-      <div className="flex h-screen">
+      <div className="flex h-screen bg-gray-100">
         <nav className="bg-[#00246B] text-white p-4">
           <ul className="flex flex-col">
             <div className="flex items-center align-middle mr-4 mb-8">

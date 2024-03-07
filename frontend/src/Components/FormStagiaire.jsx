@@ -431,7 +431,7 @@ function MultiStepForm() {
 
   return (
     <div className="flex">
-      <div className="w-1/4 h-screen bg-[#c5d6f8] p-4">
+      <div className="w-1/4 h-screen bg-gray-200 shadow-lg p-4">
         <div className="flex flex-col">
           <div 
             onClick={() => goToStep(1)} 

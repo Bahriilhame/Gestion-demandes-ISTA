@@ -28,7 +28,7 @@ function AddGestionnaire() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+    <div className=" bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md ">
         <h2 className="text-2xl font-bold mb-4 text-center">Ajouter un gestionnaire</h2>
         <form onSubmit={handleSubmit}>
