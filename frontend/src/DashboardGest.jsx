@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import FormStagiaire from './Components/FormStagiaire';
 import ListStagiaires from './Components/ListStagiaires';
 import './index.css';
+import NavbarProfile from './Components/NavbarProfile';
 
 function DashboardGest() {
   return (
@@ -21,6 +22,7 @@ function DashboardGest() {
           </ul>
         </nav>
         <div className="flex-grow">
+        <NavbarProfile/>
         <Routes>
           <Route path='/listDemandes' element={<ListStagiaires />}/>
           <Route path='/AddStagiaire' element={<FormStagiaire />}/>

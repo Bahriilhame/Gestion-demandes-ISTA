@@ -8,13 +8,15 @@ import ListStagiaires from './Components/ListStagiaires';
 import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
+import Login from './Login';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <div className="flex h-screen">
+      <div className="flex h-screen bg-gray-100">
         <div className="flex-grow">
           <Routes>
+            <Route path='/' element={<Login/>}/>
             <Route path='/dashboard-directeur' element={<DashboardDirect/>}>
               <Route path="listDemandes" element={<ListStagiaires />} />
               <Route path="AddStagiaire" element={<FormStagiaire />} />
