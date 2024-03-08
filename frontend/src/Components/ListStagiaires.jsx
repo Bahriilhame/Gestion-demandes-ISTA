@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline';
 import { useLocation } from "react-router-dom";
-import Toast from "../Toast";
+import Toast from "./Toast";
 
 function ListStagiaires() {
   const [Stagiaires, setStagiaires] = useState([]);

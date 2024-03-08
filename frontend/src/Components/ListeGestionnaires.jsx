@@ -3,7 +3,7 @@ import axios from "axios";
 import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
-import Toast from "../Toast";
+import Toast from "./Toast";
 import { useLocation } from "react-router-dom";
 import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline'; 
 
