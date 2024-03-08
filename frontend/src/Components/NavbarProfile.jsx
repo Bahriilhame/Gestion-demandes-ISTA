@@ -5,6 +5,8 @@ import { MenuIcon } from '@heroicons/react/outline';
 
 function NavbarProfile() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const userData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user : null;
+
   
     const toggleDropdown = () => {
       setDropdownOpen(!dropdownOpen);
@@ -20,8 +22,8 @@ function NavbarProfile() {
           </button>
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 bg-white rounded shadow-lg">
-              <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</Link>
-              <Link to="/deconnexion" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Déconnexion</Link>
+              <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200">{userData.nom + ' '+userData.prenom}</div>
+              <Link  onClick={()=>{localStorage.removeItem("user")}} to="/" className="block px-4 py-2 text-red-500 font-bold hover:bg-gray-200">Déconnexion</Link>
             </div>
           )}
         </div>

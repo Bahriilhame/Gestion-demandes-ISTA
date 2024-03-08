@@ -7,14 +7,14 @@ function AddGestionnaire() {
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
-  const [mdp, setMdp] = useState("");
+  const [password, setPassword] = useState("");
   const role = "gestionnaire";
 
   document.title = "ISTA | Ajout gestionnaire"; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = { nom, prenom, email, mdp, role };
+    const formData = { nom, prenom, email, password, role };
     axios.post("http://127.0.0.1:8000/api/AddGestionnaire", formData)
       .then(() => {
           // alert("Gestionnaire ajouté avec succès");
@@ -66,12 +66,12 @@ function AddGestionnaire() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="mdp" className="block text-sm font-semibold mb-1">Mot de passe:</label>
+            <label htmlFor="password" className="block text-sm font-semibold mb-1">Mot de passe:</label>
             <input
               type="password"
-              id="mdp"
-              value={mdp}
-              onChange={(e) => setMdp(e.target.value)}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="input w-[100%] h-10"
               placeholder="Entrer votre Mot de passe"
             />

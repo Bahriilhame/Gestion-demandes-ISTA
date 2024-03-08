@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DashboardDirect from './DashboardDirect';
-import DashboardGest from './DashboardGest';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import DashboardDirect from './DashboardDirect';
+// import DashboardGest from './DashboardGest';
 import './index.css';
-import ListStagiaires from './Components/ListStagiaires';
-import FormStagiaire from './Components/FormStagiaire';
-import AddGestionnaire from './Components/AddGestionnaire';
-import ListeGestionnaires from './Components/ListeGestionnaires';
-import Login from './Login';
+import RouteFunc from './Route';
+// import ListStagiaires from './Components/ListStagiaires';
+// import FormStagiaire from './Components/FormStagiaire';
+// import AddGestionnaire from './Components/AddGestionnaire';
+// import ListeGestionnaires from './Components/ListeGestionnaires';
+// import Login from './Login';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* <BrowserRouter>
       <div className="flex h-screen bg-gray-100">
         <div className="flex-grow">
           <Routes>
@@ -30,7 +31,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </BrowserRouter> */}
+    <RouteFunc/>
   </React.StrictMode>,
 );
 

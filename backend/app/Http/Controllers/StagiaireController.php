@@ -38,8 +38,7 @@ class StagiaireController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         // Valider les données reçues du formulaire
         $validatedData = $request->validate([
             'CIN' => 'required|string|unique:stagiaires',

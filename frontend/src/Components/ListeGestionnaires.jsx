@@ -14,7 +14,7 @@ function ListeAdministrateurs() {
   const [modifiedPrenom, setModifiedPrenom] = useState("");
   const [modifiedEmail, setModifiedEmail] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(5);
 
   const location = useLocation();
   const [showNotification, setShowNotification] = useState(false);

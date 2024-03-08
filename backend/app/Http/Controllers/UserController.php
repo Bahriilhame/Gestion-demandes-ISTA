@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Administrateur;
+use App\Models\User;
 
-class AdministrateurController extends Controller{
+class UserController extends Controller{
 
     public function index(){
-        $administrateurs = Administrateur::all();
-        return response()->json($administrateurs);
+        $users = User::all();
+        return response()->json($users);
     }
 
     public function store(Request $request)
@@ -17,16 +17,16 @@ class AdministrateurController extends Controller{
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:administrateurs|max:255',
-            'mdp' => 'required|string|min:8',
-            'role' => 'required|string|in:directeur,gestionnaire',
+            'email' => 'required|string|email|unique:users|max:255',
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|in:gestionnaire',
         ]);
 
-        $gestionnaire = Administrateur::create([
+        $gestionnaire = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
-            'mdp' => bcrypt($request->mdp),
+            'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
 
@@ -39,26 +39,24 @@ class AdministrateurController extends Controller{
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:administrateurs,email,'.$id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
         ]);
 
-        // Rechercher l'administrateur à mettre à jour
-        $administrateur = Administrateur::findOrFail($id);
+        $users = User::findOrFail($id);
 
-        // Mettre à jour les détails de l'administrateur
-        $administrateur->update([
+        $users->update([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
         ]);
 
         // Retourner une réponse JSON
-        return response()->json($administrateur, 200);
+        return response()->json($users, 200);
     }
 
     public function destroy($id){
-        $administrateur = Administrateur::findOrFail($id);
-        $administrateur->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
         return response()->json(null, 204);
     }
