@@ -17,10 +17,8 @@ function AddGestionnaire() {
     const formData = { nom, prenom, email, password, role };
     axios.post("http://127.0.0.1:8000/api/AddGestionnaire", formData)
       .then(() => {
-          // alert("Gestionnaire ajouté avec succès");
-          // navigate('/dashboard-directeur/listGestionnaire');
-
           navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true } })
+          window.location.reload()
       })
       .catch((error) => {
         console.error("Erreur lors de l'ajout du gestionnaire:", error);

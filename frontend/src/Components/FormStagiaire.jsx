@@ -32,9 +32,11 @@ function MultiStepForm() {
       if (response.status === 201) {
         if(userData==='directeur'){
           navigate('/dashboard-directeur/listDemandes', { state: { showNotification: true } })
+          window.location.reload()
         }
         else{
           navigate('/dashboard-gestionnaire/listDemandes', { state: { showNotification: true } })
+          window.location.reload()
         }
       }
     } catch (error) {

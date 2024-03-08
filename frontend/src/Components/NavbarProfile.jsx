@@ -7,7 +7,6 @@ function NavbarProfile() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const userData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user : null;
 
-  
     const toggleDropdown = () => {
       setDropdownOpen(!dropdownOpen);
     };

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user') !== null);
     const [role,setRole]=useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).role : null)
@@ -26,15 +27,15 @@ const Login = () => {
                         console.log(res.data.user);
                         if (role === 'directeur') {
                             navigate('/dashboard-directeur/listDemandes');
-                            // navigate('/dashboard-directeur');
+                            window.location.reload()
                         } else if (role === 'gestionnaire') {
                             navigate('/dashboard-gestionnaire/listDemandes');
-                            // navigate('/dashboard-gestionnaire');
+                            window.location.reload()
                         }
                     }
                 }).catch((error) => {
                     console.log(error);
-                    alert("Wrong email or password");
+                    setError('Email ou mot de passe incorrect')
                 });
 
             setEmail('');
@@ -44,8 +45,10 @@ const Login = () => {
         if (loggedIn) {
             if (role === 'directeur') {
                 navigate('/dashboard-directeur/listDemandes');
+                window.location.reload()
             } else if (role === 'gestionnaire') {
                 navigate('/dashboard-gestionnaire/listDemandes');
+                window.location.reload()
             }
         }
 
@@ -104,6 +107,7 @@ const Login = () => {
                                 />
                             </div>
                         </div>
+                        <span className='text-red-500 text-sm'>{error}</span>
 
                         <div>
                             <button

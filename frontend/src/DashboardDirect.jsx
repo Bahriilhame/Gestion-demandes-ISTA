@@ -4,7 +4,6 @@ import ListStagiaires from './Components/ListStagiaires';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
 import NavbarProfile from './Components/NavbarProfile';
-// import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline'; 
 
 function DashboardDirect() {
   return (
