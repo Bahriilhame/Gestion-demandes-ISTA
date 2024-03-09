@@ -80,4 +80,22 @@ class DemandeController extends Controller
             return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
         }
     }
+
+
+    public function getDemandeByStagiaireId($id)
+    {
+        try {
+            // Récupérer la demande du stagiaire par son ID
+            $demande = Demande::where('stagiaire_id', $id)->first();
+
+            // Vérifier si la demande existe
+            if ($demande) {
+                return response()->json($demande, 200);
+            } else {
+                return response()->json(['message' => 'Aucune demande trouvée pour ce stagiaire.'], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
+        }
+    }
 }
