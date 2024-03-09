@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function UpdateForm() {
+function Demande() {
   const userData = localStorage.getItem("stagiaire")
     ? JSON.parse(localStorage.getItem("stagiaire"))
     : null;
@@ -36,6 +36,7 @@ function UpdateForm() {
           anneeScolaire: "",
           typeDemande: "",
         })
+        window.location.reload()
       }
     } catch (error) {
       console.error("Erreur lors de l'envoi de la requête:", error);
@@ -98,4 +99,4 @@ function UpdateForm() {
   );
 }
 
-export default UpdateForm;
+export default Demande;

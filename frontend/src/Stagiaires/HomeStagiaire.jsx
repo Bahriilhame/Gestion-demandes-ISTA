@@ -1,5 +1,5 @@
   import { Link } from "react-router-dom";
-  import FormStagiaire from './FormStagiaire'
+  import Demande from './Demande'
   import { UserCircleIcon } from '@heroicons/react/outline';
   import { useState } from "react";
 import axios from "axios";
@@ -50,15 +50,14 @@ import { useEffect } from "react";
         </div>
       </nav>
             {demandeStatus ? (
-              <div className="text-center bg-gray-100 p-6 rounded-lg shadow-md">
-                <p className="text-xl font-bold text-gray-600">Statut de la dernier demande : <br />
-                  {/* <span>{demandeStatus}</span> */}
-                  <span className={`font-semibold ${
-                      demandeStatus === "En cours de traitement" ? "text-yellow-500" :
-                      demandeStatus === "Approuvé" ? "text-green-500" :
-                      demandeStatus === "Rejeté" ? "text-red-500" :
+              <div className={`text-center p-4 shadow-md ${
+                      demandeStatus === "En cours de traitement" ? "bg-yellow-500" :
+                      demandeStatus === "Approuvé" ? "bg-green-500" :
+                      demandeStatus === "Rejeté" ? "bg-red-500" :
                       ""
                   }`}>
+                <p className="text-xl font-bold text-gray-600">Statut de la dernière demande : <br />
+                  <span className="font-semibold text-white">
                       {demandeStatus}
                   </span>
                 </p>
@@ -67,7 +66,7 @@ import { useEffect } from "react";
               <span className="text-sm text-gray-500"></span>
               )}
         <h1 className="text-center font-bold m-4 text-2xl">Formulaire des demandes</h1>
-        <FormStagiaire/>
+        <Demande/>
       </div>
     )
   }
