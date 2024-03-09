@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import NavIsta from '../NavIsta';
+import Footer from '../Footer';
 
 const SignUp = () => {
     const [error,setError]=useState(null)
@@ -62,16 +64,9 @@ const SignUp = () => {
 
     return (
         <div className='App'>
-                <nav className="bg-[#00246B] p-4 z-10">
-                    <div className="flex items-center justify-start">
-                        <img src='./logo.png' alt="Logo" className="h-14" /> {/* Remplacez la source par votre logo */}
-                        <div className='text-white ml-2 font-bold text-lg'>
-                            <h1>ISTA HAY SALAM</h1>
-                        </div>
-                    </div>
-                </nav>
-            <div className="flex justify-center items-center h-screen bg-gray-100">
-                <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+            <NavIsta/>
+            <div className="flex justify-center items-center bg-gray-100 mt-4">
+                <div className="bg-white p-8 rounded shadow-md w-full mb-16 sm:w-[40rem] ">
                     <h3 className="text-2xl font-semibold mb-4 text-center">Créer un compte</h3>
                     <form onSubmit={onSubmit}>
                         <div className="mb-4">
@@ -150,6 +145,7 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };

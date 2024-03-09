@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Link,useNavigate } from 'react-router-dom';
- 
+import NavIsta from '../NavIsta'
+import Footer from '../Footer';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate=useNavigate()
 
 const handleSubmit = async (e) => {
@@ -35,14 +39,7 @@ const handleSubmit = async (e) => {
 
     return (
         <div className='overflow-hidden bg-gray-100'>
-            <nav className="bg-[#00246B] p-4 z-10">
-                <div className="flex items-center justify-start">
-                    <img src='./logo.png' alt="Logo" className="h-14" /> {/* Remplacez la source par votre logo */}
-                    <div className='text-white ml-2 font-bold text-lg'>
-                        <h1>ISTA HAY SALAM</h1>
-                    </div>
-                </div>
-            </nav>
+            <NavIsta/>
             <div className=" bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900">Connexion</h2>
@@ -74,11 +71,11 @@ const handleSubmit = async (e) => {
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Mot de passe
                             </label>
-                            <div className="mt-1">
+                            <div className="mt-1 relative">
                                 <input
                                     id="password"
                                     name="password"
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     autoComplete="current-password"
                                     required
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
@@ -86,6 +83,13 @@ const handleSubmit = async (e) => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 px-3 flex items-center"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <EyeOffIcon className="h-5 w-5 text-gray-400" /> : <EyeIcon className="h-5 w-5 text-gray-400" />}
+                                </button>
                             </div>
                         </div>
                         <span className='text-red-500 text-sm'>{error}</span>
@@ -107,6 +111,7 @@ const handleSubmit = async (e) => {
                 </div>
             </div>
         </div>
+        <Footer/>
         </div>
     );
 };
