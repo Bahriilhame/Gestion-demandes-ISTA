@@ -22,7 +22,7 @@ function NavbarProfile() {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 bg-white rounded shadow-lg">
               <div className="block px-4 py-2 text-gray-800 hover:bg-gray-200">{userData.nom + ' '+userData.prenom}</div>
-              <Link  onClick={()=>{localStorage.removeItem("user")}} to="/" className="block px-4 py-2 text-red-500 font-bold hover:bg-gray-200">Déconnexion</Link>
+              <Link  onClick={()=>{localStorage.removeItem("user")}} to="/app/ista" className="block px-4 py-2 text-red-500 font-bold hover:bg-gray-200">Déconnexion</Link>
             </div>
           )}
         </div>
