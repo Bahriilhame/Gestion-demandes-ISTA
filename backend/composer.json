@@ -5,15 +5,16 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "nette/schema": "^1.2",
-        "nette/utils": "^3.2",
-        "phpspec/prophecy": "^1.15",
-        "php": "^8.2.4",
+        "php": "^8.2.0",
+        "doctrine/dbal": "^4.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "tymon/jwt-auth": "*"
+        "nette/schema": "^1.2",
+        "nette/utils": "^3.2",
+        "phpspec/prophecy": "^1.15",
+        "tymon/jwt-auth": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

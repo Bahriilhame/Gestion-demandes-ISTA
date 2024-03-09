@@ -8,21 +8,22 @@ import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
 import Login from './Components/Login';
+import SignUp from './Components/signup';
 // import NotFound from './NotFound';
-
+ 
 export default function RouteFunc() {
     const [role, setRole] = useState(null);
 
     useEffect(() => {
         const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
         setRole(userRole);
-    }, []);
-    console.log(role);
-    useEffect(()=>{
+    }, [localStorage]);
+
+    useEffect(() => {
         if (window.location.pathname === '/') {
-            localStorage.removeItem("user")
+            localStorage.removeItem("user");
         }
-    })
+    }, [window.location.pathname]);
 
     return (
         <BrowserRouter>
@@ -43,10 +44,16 @@ export default function RouteFunc() {
                                 <Route path="AddStagiaire" element={<FormStagiaire />} />
                             </Route>
                         }
-                        {/* <Route path='*' element={<NotFound />} /> */}
+                        <Route path="/sign-up" element={<SignUp />} />
+
                     </Routes>
                 </div>
             </div>
         </BrowserRouter>
     );
 }
+
+
+
+
+

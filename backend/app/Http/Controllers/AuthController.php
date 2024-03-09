@@ -41,6 +41,15 @@ class AuthController extends Controller
         return $this->createNewToken($token);
     }
 
+        //////////////////////////////////////
+
+    /**
+     * Register a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+
+
+
     /**
      * Log the user out (Invalidate the token).
      *
@@ -85,5 +94,7 @@ class AuthController extends Controller
             'user' => auth()->user()
         ]);
     }
+
+
 
 }

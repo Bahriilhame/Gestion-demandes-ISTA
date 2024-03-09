@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StagiaireAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+    // Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [StagiaireAuthController::class, 'register']);
+
 
     // // stagiaires
     // Route::get('/stagiaires', [StagiaireController::class, 'index']);

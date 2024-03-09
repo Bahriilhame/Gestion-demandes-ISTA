@@ -13,8 +13,17 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('filiere');
+            // $table->string('filiere')->nullable()->change();
+
             $table->integer('groupe');
             $table->integer('anneeScolaire');
+
+            $table->string('email')->unique(); // Ajout du champ email
+            $table->timestamp('email_verified_at')->nullable();
+            
+            $table->string('password'); // Ajout du champ password
+            
+            $table->rememberToken();
             $table->timestamps();
         });
     }

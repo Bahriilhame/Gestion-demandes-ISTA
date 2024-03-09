@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+ 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,13 +30,14 @@ const Login = () => {
                             window.location.reload()
                         } else if (role === 'gestionnaire') {
                             navigate('/dashboard-gestionnaire/listDemandes');
-                            window.location.reload()
+                            // window.location.reload()
                         }
                     }
                 }).catch((error) => {
                     console.log(error);
                     setError('Email ou mot de passe incorrect')
                 });
+
 
             setEmail('');
             setPassword('');
@@ -48,7 +49,7 @@ const Login = () => {
                 window.location.reload()
             } else if (role === 'gestionnaire') {
                 navigate('/dashboard-gestionnaire/listDemandes');
-                window.location.reload()
+                // window.location.reload()
             }
         }
 
