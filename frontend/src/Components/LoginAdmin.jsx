@@ -1,37 +1,57 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
  
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate=useNavigate()
+    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('user') !== null);
+    const [role,setRole]=useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).role : null)
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+            e.preventDefault();
 
-    const userObject = {
-        email: email,
-        password: password
+            const userObject = {
+                email: email,
+                password: password
+            };
+
+            axios.post('http://127.0.0.1:8000/api/auth/login', userObject)
+                .then((res) => {
+                    if (res.status === 200) {
+                        setLoggedIn(true);
+                        localStorage.setItem('user', JSON.stringify(res.data));
+                        setRole(res.data.user.role);
+                        console.log(res.data.user);
+                        if (role === 'directeur') {
+                            navigate('/dashboard-directeur/listDemandes');
+                            window.location.reload()
+                        } else if (role === 'gestionnaire') {
+                            navigate('/dashboard-gestionnaire/listDemandes');
+                            window.location.reload()
+                        }
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                    setError('Email ou mot de passe incorrect')
+                });
+
+
+            setEmail('');
+            setPassword('');
     };
 
-    try {
-        const res = await axios.post('http://127.0.0.1:8000/api/auth/loginStg', userObject);
-        if (res.status === 200) {
-            const user = res.data.user; 
-            localStorage.setItem('user', JSON.stringify(user));
-            console.log(user);
-            navigate('/home')
+        if (loggedIn) {
+            if (role === 'directeur') {
+                navigate('/dashboard-directeur/listDemandes');
+                window.location.reload()
+            } else if (role === 'gestionnaire') {
+                navigate('/dashboard-gestionnaire/listDemandes');
+                window.location.reload()
+            }
         }
-    } catch (error) {
-        console.log(error);
-        setError('Email ou mot de passe incorrect');
-    }
-
-    setEmail('');
-    setPassword('');
-};
 
     return (
         <div className='overflow-hidden bg-gray-100'>
@@ -99,11 +119,6 @@ const handleSubmit = async (e) => {
                             </button>
                         </div>
                     </form>
-                    <div className="text-center mt-4">
-                            <span className="font-medium text-sm text-gray-600 hover:text-gray-500">
-                                Vous n&apos;avez pas encore de compte ? <Link to='sign-up' className='text-red-500'>Inscrivez-vous ici</Link>
-                            </span>
-                        </div>
                 </div>
             </div>
         </div>

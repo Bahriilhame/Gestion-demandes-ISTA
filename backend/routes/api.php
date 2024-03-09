@@ -29,6 +29,8 @@ Route::group([
 
     // Route::post('/register', [AuthController::class, 'register']);
     Route::post('/register', [StagiaireAuthController::class, 'register']);
+    Route::post('/loginStg', [StagiaireAuthController::class, 'login']);
+    Route::post('/logout', [StagiaireAuthController::class, 'logout']);
 
 
     // // stagiaires

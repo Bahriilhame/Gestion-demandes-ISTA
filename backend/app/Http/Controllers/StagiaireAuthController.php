@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Stagiaire;
 use Validator;
+use App\Models\Stagiaire;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
+
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class StagiaireAuthController extends Controller
 {
@@ -36,5 +40,75 @@ class StagiaireAuthController extends Controller
             'stagiaire' => $stagiaire
         ], 201);
     }
+
+
+    // public function login(Request $request){
+    // 	$validator = Validator::make($request->all(), [
+    //         'email' => 'required|email',
+    //         'password' => 'required|string|min:6',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->errors(), 422);
+    //     }
+
+    //     if (! $token = auth()->attempt($validator->validated())) {
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+    //     }
+
+    //     // Session::put('user_token', $token);
+
+    //     return $this->createNewToken($token);
+    // }
+
+
+    public function login(Request $request){
+        $credentials = $request->only('email', 'password');
+        try {
+            $token = auth('stg')->attempt($credentials);
+            if (!$token) {
+                return response()->json(['success' => false, 'error' => 'Some Error Message'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
+        }
+        return $this->finalResponse($token);
+    }
+
+    // public function finalResponse($token){
+    //     // Retrieve the authenticated user
+    //     $user = auth('stg')->user();
+    
+    //     // Here, you can customize the response according to your requirements
+    //     return response()->json([
+    //         'success' => true,
+    //         'token' => $token,
+    //         'user' => $user, // Include the user information in the response
+    //         'message' => 'Login successful'
+    //     ], 200);
+    // }
+
+    public function finalResponse($token){
+        // Retrieve the authenticated user
+        $user = auth('stg')->user();
+    
+        // Here, you can customize the response according to your requirements
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => $user,
+            'message' => 'Login successful'
+        ], 200);
+    }
+
+    public function logout(Request $request){
+    try {
+        auth('stg')->logout();
+        return response()->json(['message' => 'Successfully logged out'], 200);
+    } catch (JWTException $e) {
+        return response()->json(['message' => 'Failed to logout, please try again.'], 500);
+    }
+}
 }
 

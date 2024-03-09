@@ -8,22 +8,24 @@ import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
 import Login from './Components/Login';
+import LoginAdmin from './Components/LoginAdmin';
 import SignUp from './Components/signup';
+import HomeStagiaire from './Components/HomeStagiaire';
 // import NotFound from './NotFound';
  
 export default function RouteFunc() {
     const [role, setRole] = useState(null);
 
-    useEffect(() => {
-        const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
-        setRole(userRole);
-    }, [localStorage]);
+    // useEffect(() => {
+    //     const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
+    //     setRole(userRole);
+    // }, [localStorage]);
 
-    useEffect(() => {
-        if (window.location.pathname === '/') {
-            localStorage.removeItem("user");
-        }
-    }, [window.location.pathname]);
+    // useEffect(() => {
+    //     if (window.location.pathname === '/') {
+    //         localStorage.removeItem("user");
+    //     }
+    // }, [window.location.pathname]);
 
     return (
         <BrowserRouter>
@@ -45,7 +47,8 @@ export default function RouteFunc() {
                             </Route>
                         }
                         <Route path="/sign-up" element={<SignUp />} />
-
+                        <Route path="/app/ista" element={<LoginAdmin />} />
+                        <Route path="/home" element={<HomeStagiaire />} />
                     </Routes>
                 </div>
             </div>

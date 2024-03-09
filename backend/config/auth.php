@@ -46,6 +46,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'stg' => [
+            'driver' => 'jwt',
+            'provider' => 'stagiaires',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +75,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'stagiaires' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Stagiaire::class,
         ],
 
         // 'users' => [
