@@ -7,25 +7,25 @@ import ListStagiaires from './Components/ListStagiaires';
 import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
-import Login from './Components/Login';
+import Login from './Stagiaires/Login';
 import LoginAdmin from './Components/LoginAdmin';
-import SignUp from './Components/signup';
-import HomeStagiaire from './Components/HomeStagiaire';
+import SignUp from './Stagiaires/signup';
+import HomeStagiaire from './Stagiaires/HomeStagiaire';
 // import NotFound from './NotFound';
  
 export default function RouteFunc() {
     const [role, setRole] = useState(null);
 
-    // useEffect(() => {
-    //     const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
-    //     setRole(userRole);
-    // }, [localStorage]);
+    useEffect(() => {
+        const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
+        setRole(userRole);
+    }, [localStorage]);
 
-    // useEffect(() => {
-    //     if (window.location.pathname === '/') {
-    //         localStorage.removeItem("user");
-    //     }
-    // }, [window.location.pathname]);
+    useEffect(() => {
+        if (window.location.pathname === '/') {
+            localStorage.removeItem("user");
+        }
+    }, [window.location.pathname]);
 
     return (
         <BrowserRouter>

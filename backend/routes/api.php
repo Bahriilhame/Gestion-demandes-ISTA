@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StagiaireAuthController;
@@ -48,8 +49,10 @@ Route::group([
 
     // stagiaires
     Route::get('/stagiaires', [StagiaireController::class, 'index']);
+    // Route::get('/stagiaires', [DemandeController::class, 'index']);
     Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
     Route::delete('/DeleteStagiaires/{CIN}', [StagiaireController::class, 'destroy']);
+    Route::put('/UpdateDemande/{id}', [DemandeController::class, 'update']);
 
     // gestionnaires
     Route::post('/AddGestionnaire', [UserController::class, 'store']);

@@ -19,8 +19,8 @@ const handleSubmit = async (e) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/api/auth/loginStg', userObject);
         if (res.status === 200) {
-            const user = res.data.user; 
-            localStorage.setItem('user', JSON.stringify(user));
+            const user = res.data.stagiaire; 
+            localStorage.setItem('stagiaire', JSON.stringify(user));
             console.log(user);
             navigate('/home')
         }

@@ -35,8 +35,7 @@ class Stagiaire extends Model implements Authenticatable, JWTSubject // Implemen
 
     protected $fillable = ['CIN', 'nom', 'prenom', 'filiere', 'groupe', 'anneeScolaire', 'email', 'password'];
 
-    public function demandes()
-    {
+    public function demandes(){
         return $this->hasMany(Demande::class);
     }
 

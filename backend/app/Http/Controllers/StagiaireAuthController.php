@@ -42,26 +42,6 @@ class StagiaireAuthController extends Controller
     }
 
 
-    // public function login(Request $request){
-    // 	$validator = Validator::make($request->all(), [
-    //         'email' => 'required|email',
-    //         'password' => 'required|string|min:6',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json($validator->errors(), 422);
-    //     }
-
-    //     if (! $token = auth()->attempt($validator->validated())) {
-    //         return response()->json(['error' => 'Unauthorized'], 401);
-    //     }
-
-    //     // Session::put('user_token', $token);
-
-    //     return $this->createNewToken($token);
-    // }
-
-
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
         try {
@@ -75,18 +55,6 @@ class StagiaireAuthController extends Controller
         return $this->finalResponse($token);
     }
 
-    // public function finalResponse($token){
-    //     // Retrieve the authenticated user
-    //     $user = auth('stg')->user();
-    
-    //     // Here, you can customize the response according to your requirements
-    //     return response()->json([
-    //         'success' => true,
-    //         'token' => $token,
-    //         'user' => $user, // Include the user information in the response
-    //         'message' => 'Login successful'
-    //     ], 200);
-    // }
 
     public function finalResponse($token){
         // Retrieve the authenticated user
@@ -97,7 +65,7 @@ class StagiaireAuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => $user,
+            'stagiaire' => $user,
             'message' => 'Login successful'
         ], 200);
     }
