@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import FormStagiaire from './Components/FormStagiaire';
 import ListStagiaires from './Components/ListStagiaires';
+import ListDemandes from './Components/ListDemandes';
 import './index.css';
 import NavbarProfile from './Components/NavbarProfile';
 
@@ -18,14 +19,19 @@ function DashboardGest() {
             </li>
             <li className="mb-4">
               <Link to='/dashboard-gestionnaire/AddStagiaire' className="hover:text-gray-300">Form Ajout des stagiaires</Link>
-            </li>          
+            </li>       
+            <li className="mb-4">
+              <Link to='/dashboard-gestionnaire/listStagiaires' className="hover:text-gray-300">List des stagiaires</Link>
+            </li>
+   
           </ul>
         </nav>
         <div className="flex-grow">
         <NavbarProfile/>
         <Routes>
-          <Route path='/listDemandes' element={<ListStagiaires />}/>
+          <Route path='/listDemandes' element={<ListDemandes />}/>
           <Route path='/AddStagiaire' element={<FormStagiaire />}/>
+          <Route path='/listStagiaires' element={<ListStagiaires />}/>
         </Routes>
         </div>
       </div>

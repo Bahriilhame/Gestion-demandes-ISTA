@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import Toast from "./Toast";
 import { useLocation } from "react-router-dom";
-import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline'; 
+import Stats from "./Stats";
 
 function ListeAdministrateurs() {
   const [administrateurs, setAdministrateurs] = useState([]);
@@ -102,17 +102,7 @@ function ListeAdministrateurs() {
   return (
     <div>
         <br />
-        <div className="grid grid-cols-3 gap-4 mx-4">
-            <div className="bg-white shadow-lg p-2 rounded-lg">
-                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><DocumentTextIcon className='w-6 h-6 text-blue-800 mr-2'/>10 Demandes</h2>
-            </div>
-            <div className="bg-white shadow-lg p-2 rounded-lg">
-                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><UserIcon className='w-6 h-6 text-blue-800 mr-2'/>320 Stagiaires</h2>
-            </div>
-            <div className="bg-white shadow-lg p-2 rounded-lg">
-                <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2"><FolderIcon className='w-6 h-6 text-blue-800 mr-2'/>1200 Total des attestations</h2>
-            </div>
-        </div>
+        <Stats/>
       <div className="container mx-auto px-4 py-8">
               {showNotification && <Toast />} 
         <h1 className="text-3xl font-bold mb-6">Liste des gestionnaires</h1>
@@ -133,11 +123,11 @@ function ListeAdministrateurs() {
                   <td className="border px-4 py-2">{administrateur.prenom}</td>
                   <td className="border px-4 py-2">{administrateur.email}</td>
                   <td className="border px-4 py-2">
-                    <button onClick={() => openModal(administrateur)} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => openModal(administrateur)} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-[48%]" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faEye} className="mr-2" />
                       Modifier
                     </button>
-                    <button onClick={() => handleDelete(administrateur.id)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => handleDelete(administrateur.id)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-[48%]" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faTrash} className="mr-2" />
                       Supprimer
                     </button>

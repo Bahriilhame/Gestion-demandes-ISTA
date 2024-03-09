@@ -33,7 +33,7 @@ function HomeStagiaire() {
         </div>
       </div>
     </nav>
-      <h1 className="text-center font-bold text-lg m-2">Form des demandes</h1>
+      <h1 className="text-center font-bold m-4 text-2xl">Formulaire des demandes</h1>
       <FormStagiaire/>
     </div>
   )

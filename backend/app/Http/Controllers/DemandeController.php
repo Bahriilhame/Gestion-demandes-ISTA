@@ -48,4 +48,10 @@ class DemandeController extends Controller
         
         return response()->json($demandes, 200);
     }
+
+    public function destroy($id){
+        $demande = Demande::where('id', $id)->firstOrFail();
+        $demande->delete();
+        return response()->json(null, 204);
+    }
 }

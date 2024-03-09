@@ -4,6 +4,7 @@ import {useEffect,useState} from 'react'
 import DashboardGest from './DashboardGest';
 import './index.css';
 import ListStagiaires from './Components/ListStagiaires';
+import ListDemandes from './Components/ListDemandes';
 import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
@@ -22,8 +23,14 @@ export default function RouteFunc() {
     }, [localStorage]);
 
     useEffect(() => {
-        if (window.location.pathname === '/') {
+        if (window.location.pathname === '/app/ista') {
             localStorage.removeItem("user");
+        }
+    }, [window.location.pathname]);
+
+    useEffect(() => {
+        if (window.location.pathname === '/') {
+            localStorage.removeItem("stagiaire");
         }
     }, [window.location.pathname]);
 
@@ -35,7 +42,8 @@ export default function RouteFunc() {
                         <Route path='/' element={<Login />} />
                         {role === 'directeur' ?
                             <Route path='/dashboard-directeur' element={<DashboardDirect />}>
-                                <Route path="listDemandes" element={<ListStagiaires />} />
+                                <Route path="listDemandes" element={<ListDemandes />} />
+                                <Route path="listStagiaires" element={<ListStagiaires />} />
                                 <Route path="AddStagiaire" element={<FormStagiaire />} />
                                 <Route path="listGestionnaire" element={<ListeGestionnaires />} />
                                 <Route path="AddGestionnaire" element={<AddGestionnaire />} />
@@ -44,6 +52,7 @@ export default function RouteFunc() {
                             <Route path='/dashboard-gestionnaire' element={<DashboardGest />}>
                                 <Route path="listDemandes" element={<ListStagiaires />} />
                                 <Route path="AddStagiaire" element={<FormStagiaire />} />
+                                <Route path="listStagiaires" element={<ListStagiaires />} />
                             </Route>
                         }
                         <Route path="/sign-up" element={<SignUp />} />
