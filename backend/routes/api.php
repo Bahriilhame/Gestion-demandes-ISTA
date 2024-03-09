@@ -44,6 +44,7 @@ Route::group([
     Route::get('/demandes', [DemandeController::class, 'index']);
     Route::put('/UpdateDemande/{id}', [DemandeController::class, 'update']);
     Route::delete('/DeleteDemande/{id}', [DemandeController::class, 'destroy']);
+    Route::put('/demandes/{id}/update-status', [DemandeController::class, 'updateStatus']);
     
     // Administrateurs
     Route::post('/AddGestionnaire', [UserController::class, 'store']);

@@ -99,6 +99,25 @@ function ListStagiaires() {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+  const updateDemandeStatus = (id, newStatus) => {
+    axios.put(`http://127.0.0.1:8000/api/demandes/${id}/update-status`, { status: newStatus })
+      .then(() => {
+        // Mettre à jour localement le statut de la demande
+        setDemandes(prevDemandes => {
+          return prevDemandes.map(demande => {
+            if (demande.id === id) {
+              return { ...demande, status: newStatus };
+            }
+            return demande;
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error updating demande status:', error);
+      });
+  };
+
   return (
     <div>
       <br />
@@ -127,6 +146,7 @@ function ListStagiaires() {
                 <th className="px-4 py-2">Filiere</th>
                 <th className="px-4 py-2">Type d&apos;attestation</th>
                 <th className="px-4 py-2">Demande a</th>
+                <th className="px-4 py-2">Status</th>
                 <th className="px-4 py-2">Action</th>
               </tr>
             </thead>
@@ -142,6 +162,17 @@ function ListStagiaires() {
                     </div>
                   </td>
                   <td className="border px-4 py-2">{formatDate(s.dateSoumission)}</td>
+                  <td className="border px-4 py-2">
+                    <select
+                      value={s.status}
+                      onChange={(e) => updateDemandeStatus(s.id, e.target.value)}
+                      className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="En cours de traitement">En attente</option>
+                      <option value="Approuvé">Approuvé</option>
+                      <option value="Rejeté">Rejeté</option>
+                    </select>
+                  </td>
                   <td className="border px-4 py-2">
                     <button onClick={() => openModal(s)} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-[48%]" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faEye} className="mr-2" />

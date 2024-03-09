@@ -54,4 +54,30 @@ class DemandeController extends Controller
         $demande->delete();
         return response()->json(null, 204);
     }
+
+
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            // Trouver la demande par ID
+            $demande = Demande::findOrFail($id);
+            
+            // Valider les données de la requête
+            $request->validate([
+                'status' => 'required', // Définissez vos valeurs de statut autorisées
+            ]);
+
+            // Mettre à jour le statut de la demande
+            $demande->status = $request->input('status');
+            $demande->save();
+
+            // Retourner une réponse JSON indiquant si la mise à jour du statut a réussi ou si une erreur s'est produite
+            return response()->json(['message' => 'Statut mis à jour avec succès'], 200);
+        } catch (\Exception $e) {
+            // Gérer les exceptions
+            return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
+        }
+    }
 }

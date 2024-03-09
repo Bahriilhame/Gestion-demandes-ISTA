@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreign('stagiaire_id')->references('id')->on('stagiaires')->onDelete('cascade');
             $table->date('dateSoumission');
             $table->string('typeDemande');
+            $table->string('status')->default('En cours de traitement'); 
             $table->timestamps();
         });
     }
