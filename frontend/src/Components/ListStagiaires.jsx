@@ -1,12 +1,12 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye,faKey,faSave } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faKey, faSave, faSearch  } from '@fortawesome/free-solid-svg-icons';
 import Stats from "./Stats";
 
 function ListStagiaires() {
-  const [Stagiaires, setStagiaires] = useState([]);
+  const [stagiaires, setStagiaires] = useState([]);
   const [selectedStagiaire, setSelectedStagiaire] = useState(null);
   const [selectedPassword, setSelectedPassword] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,6 +14,7 @@ function ListStagiaires() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     document.title = "ISTA | Liste des demandes";
@@ -28,7 +29,7 @@ function ListStagiaires() {
     const handleEscKeyPress = (event) => {
       if (event.keyCode === 27) {
         closeModal();
-        closeChangeModal()
+        closeChangeModal();
       }
     };
 
@@ -77,7 +78,19 @@ function ListStagiaires() {
   // Calculate indexes for pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = Stagiaires.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Filter stagiaires based on search query
+  const filteredStagiaires = stagiaires.filter(stagiaire => {
+    const { nom, prenom, CIN } = stagiaire;
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    return (
+      nom.toLowerCase().includes(lowerCaseQuery) ||
+      prenom.toLowerCase().includes(lowerCaseQuery) ||
+      CIN.includes(searchQuery)
+    );
+  });
+
+  const currentItems = filteredStagiaires.slice(indexOfFirstItem, indexOfLastItem);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -85,9 +98,19 @@ function ListStagiaires() {
   return (
     <div>
       <br />
-      <Stats/>
+      <Stats />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Liste des comptes stagiaires</h1>
+        <div className="mb-4 relative">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Rechercher par CIN, nom ou prénom"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <FontAwesomeIcon icon={faSearch} className="absolute right-3 top-3 text-gray-400" />
+        </div>
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
@@ -105,11 +128,11 @@ function ListStagiaires() {
                   <td className="border px-4 py-2">{s.CIN}</td>
                   <td className="border px-4 py-2">{s.email}</td>
                   <td className="border px-4 py-2 flex">
-                    <button onClick={() => {openModal(s);setOldPassword(s.password)}} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => { openModal(s); setOldPassword(s.password) }} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faEye} className="mr-2" />
                       Afficher
                     </button>
-                    <button onClick={() => {setOldPassword(s.password);openChangeModal(s)}} className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => { setOldPassword(s.password); openChangeModal(s) }} className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faKey} className="mr-2" />
                       Changer Mot de passe
                     </button>
@@ -120,7 +143,7 @@ function ListStagiaires() {
           </table>
         </div>
         <div className="mt-4 flex justify-center">
-          {Array.from({ length: Math.ceil(Stagiaires.length / itemsPerPage) }, (_, index) => (
+          {Array.from({ length: Math.ceil(filteredStagiaires.length / itemsPerPage) }, (_, index) => (
             <button
               key={index}
               onClick={() => paginate(index + 1)}
@@ -158,15 +181,15 @@ function ListStagiaires() {
               <h2 className="text-xl font-bold mb-4">Modifier le mot de passe de {selectedPassword.nom + ' ' + selectedPassword.prenom}</h2>
               <div className="hidden">
                 <label htmlFor="oldPassword" className="block text-sm font-medium text-gray-700">Old Password</label>
-                <input type="password" id="oldPassword" readOnly value={selectedPassword.password} className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input type="password" id="oldPassword" readOnly value={selectedPassword.password} className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
               </div>
               <div className="mb-4">
                 <label htmlFor="newPassword" className="block text-sm font-semibold mb-1">Nouveau Mot de passe</label>
-                <input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"/>
+                <input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
               </div>
               <div className="mb-4">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirmer Mot de passe</label>
-                <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"/>
+                <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
               </div>
               <div className="flex justify-between">
                 <button onClick={() => handleChangePassword()} className="mt-4 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
@@ -186,4 +209,3 @@ function ListStagiaires() {
 }
 
 export default ListStagiaires;
-

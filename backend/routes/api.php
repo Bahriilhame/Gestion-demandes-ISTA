@@ -7,17 +7,6 @@ use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StagiaireAuthController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -34,11 +23,11 @@ Route::group([
     Route::post('/loginStg', [StagiaireAuthController::class, 'login']);
     Route::post('/logout', [StagiaireAuthController::class, 'logout']);
 });
-Route::put('/change-password', [StagiaireAuthController::class, 'changePassword']);
     // stagiaires
     Route::get('/stagiaires', [StagiaireController::class, 'index']);
     Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
     Route::delete('/DeleteStagiaires/{CIN}', [StagiaireController::class, 'destroy']);
+    Route::put('/change-password', [StagiaireAuthController::class, 'changePassword']);
     
     // Demandes
     Route::get('/demandes', [DemandeController::class, 'index']);
