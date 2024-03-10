@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+//list stagiaire
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faKey, faSave, faSearch  } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faKey, faSave, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Stats from "./Stats";
 
 function ListStagiaires() {
@@ -11,10 +12,11 @@ function ListStagiaires() {
   const [selectedPassword, setSelectedPassword] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
-  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     document.title = "ISTA | Liste des demandes";
@@ -60,12 +62,10 @@ function ListStagiaires() {
     try {
       const response = await axios.put('http://127.0.0.1:8000/api/change-password', {
         id: selectedPassword.id,
-        old_password: oldPassword,
         password: newPassword,
         password_confirmation: confirmPassword
       });
       console.log(response.data.message);
-      setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
       closeChangeModal();
@@ -128,11 +128,11 @@ function ListStagiaires() {
                   <td className="border px-4 py-2">{s.CIN}</td>
                   <td className="border px-4 py-2">{s.email}</td>
                   <td className="border px-4 py-2 flex">
-                    <button onClick={() => { openModal(s); setOldPassword(s.password) }} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => { openModal(s); }} className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faEye} className="mr-2" />
                       Afficher
                     </button>
-                    <button onClick={() => { setOldPassword(s.password); openChangeModal(s) }} className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => { openChangeModal(s) }} className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2 w-full text-sm" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faKey} className="mr-2" />
                       Changer Mot de passe
                     </button>
@@ -179,17 +179,35 @@ function ListStagiaires() {
                 </span>
               </button>
               <h2 className="text-xl font-bold mb-4">Modifier le mot de passe de {selectedPassword.nom + ' ' + selectedPassword.prenom}</h2>
-              <div className="hidden">
-                <label htmlFor="oldPassword" className="block text-sm font-medium text-gray-700">Old Password</label>
-                <input type="password" id="oldPassword" readOnly value={selectedPassword.password} className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-              </div>
               <div className="mb-4">
                 <label htmlFor="newPassword" className="block text-sm font-semibold mb-1">Nouveau Mot de passe</label>
-                <input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                <div className="relative">
+                  <input type={showNewPassword ? "text" : "password"} id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowNewPassword(!showNewPassword);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
+                  </button>
+                </div>
               </div>
               <div className="mb-4">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirmer Mot de passe</label>
-                <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                <div className="relative">
+                  <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowConfirmPassword(!showConfirmPassword);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                  </button>
+                </div>
               </div>
               <div className="flex justify-between">
                 <button onClick={() => handleChangePassword()} className="mt-4 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
