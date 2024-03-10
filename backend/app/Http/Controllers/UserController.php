@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller{
 
     public function index(){
@@ -35,24 +37,34 @@ class UserController extends Controller{
 
     public function update(Request $request, $id)
     {
-        // Valider les données
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-        ]);
+    // Valider les données
+    $request->validate([
+        'nom' => 'required|string|max:255',
+        'prenom' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,'.$id,
+        'password' => 'sometimes|required|string|min:8', // Le mot de passe est facultatif mais nécessaire s'il est fourni
+    ]);
 
-        $users = User::findOrFail($id);
+    $user = User::findOrFail($id);
 
-        $users->update([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'email' => $request->email,
-        ]);
+    $userData = [
+        'nom' => $request->nom,
+        'prenom' => $request->prenom,
+        'email' => $request->email,
+    ];
 
-        // Retourner une réponse JSON
-        return response()->json($users, 200);
+    // Mettre à jour le mot de passe s'il est fourni
+    if ($request->has('password')) {
+        $userData['password'] = Hash::make($request->password);
     }
+
+    $user->update($userData);
+
+    // Retourner une réponse JSON
+    return response()->json($user, 200);
+    
+    }
+
 
     public function destroy($id){
         $user = User::findOrFail($id);
@@ -60,4 +72,5 @@ class UserController extends Controller{
 
         return response()->json(null, 204);
     }
+
 }
