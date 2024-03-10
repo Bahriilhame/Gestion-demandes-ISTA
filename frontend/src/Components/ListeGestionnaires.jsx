@@ -34,8 +34,9 @@ function ListeAdministrateurs() {
 
     axios.get("http://127.0.0.1:8000/api/gestionnaires")
       .then((response) => {
-        const reversedAdministrateurs = [...response.data].reverse();
-        setAdministrateurs(reversedAdministrateurs);
+        const gestionnaires=response.data.filter(res=>res.role==='gestionnaire')
+        const reversedGestionnaires = [...gestionnaires].reverse();
+        setAdministrateurs(reversedGestionnaires);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des administrateurs:", error);
