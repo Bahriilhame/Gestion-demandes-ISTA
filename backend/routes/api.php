@@ -28,6 +28,7 @@ Route::group([
     Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
     Route::delete('/DeleteStagiaires/{CIN}', [StagiaireController::class, 'destroy']);
     Route::put('/change-password', [StagiaireAuthController::class, 'changePassword']);
+    Route::get('/stagiaires/{stagiaireId}/history', [StagiaireController::class, 'showHistory']);
     
     // Demandes
     Route::get('/demandes', [DemandeController::class, 'index']);

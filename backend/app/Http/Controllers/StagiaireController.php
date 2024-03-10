@@ -72,4 +72,18 @@ class StagiaireController extends Controller{
         $stagiaire->delete();
         return response()->json(null, 204);
     }
+
+    public function showHistory($stagiaireId)
+    {
+        // Rechercher le stagiaire par son identifiant
+        $stagiaire = Stagiaire::findOrFail($stagiaireId);
+
+        // Récupérer toutes les demandes associées à ce stagiaire
+        $historiqueDemandes = Demande::where('stagiaire_id', $stagiaireId)->get();
+
+        // Retourner les demandes dans une vue ou en format JSON
+        return response()->json($historiqueDemandes);
+        // ou
+        // return view('historique_demandes', compact('stagiaire', 'historiqueDemandes'));
+    }
 }
