@@ -29,7 +29,7 @@ function Stats() {
             <div className="bg-white shadow-lg p-2 rounded-lg">
                 <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2">
                     <DocumentTextIcon className='w-6 h-6 text-blue-800 mr-2' />
-                    {Demandes.length} Demandes aujourd&apos;hui
+                    {DemandesDay.length} Demandes aujourd&apos;hui
                 </h2>
             </div>
             <div className="bg-white shadow-lg p-2 rounded-lg">
@@ -41,7 +41,7 @@ function Stats() {
             <div className="bg-white shadow-lg p-2 rounded-lg">
                 <h2 className="text-lg flex text-gray-500 items-center font-semibold mb-2">
                     <FolderIcon className='w-6 h-6 text-blue-800 mr-2' />
-                    {DemandesDay.length} Total des demandes
+                    {Demandes.length} Total des demandes
                 </h2>
             </div>
         </div>

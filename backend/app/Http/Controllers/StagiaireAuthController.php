@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Validator;
 use App\Models\Stagiaire;
 use Illuminate\Http\Request;
+
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
-
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class StagiaireAuthController extends Controller
@@ -78,5 +80,24 @@ class StagiaireAuthController extends Controller
         return response()->json(['message' => 'Failed to logout, please try again.'], 500);
     }
 }
+
+
+
+public function changePassword(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:stagiaires,id', // Ensure the provided ID exists in the users table
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Get the user/stagiaire by ID
+        $user = Stagiaire::findOrFail($request->id);
+    
+        // Update the password
+        $user->password = bcrypt($request->password);
+        $user->save();
+    
+        return response()->json(['message' => 'Password changed successfully'], 200);
+    }
 }
 

@@ -34,7 +34,7 @@ Route::group([
     Route::post('/loginStg', [StagiaireAuthController::class, 'login']);
     Route::post('/logout', [StagiaireAuthController::class, 'logout']);
 });
-
+Route::put('/change-password', [StagiaireAuthController::class, 'changePassword']);
     // stagiaires
     Route::get('/stagiaires', [StagiaireController::class, 'index']);
     Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
