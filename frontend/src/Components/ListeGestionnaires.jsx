@@ -1,8 +1,10 @@
+// ListGestionnaire
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import Toast from "./Toast";
 import { useLocation } from "react-router-dom";
 import Stats from "./Stats";
@@ -13,8 +15,12 @@ function ListeAdministrateurs() {
   const [modifiedNom, setModifiedNom] = useState("");
   const [modifiedPrenom, setModifiedPrenom] = useState("");
   const [modifiedEmail, setModifiedEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const location = useLocation();
   const [showNotification, setShowNotification] = useState(false);
@@ -70,17 +76,26 @@ function ListeAdministrateurs() {
     setModifiedNom("");
     setModifiedPrenom("");
     setModifiedEmail("");
+    setNewPassword("");
+    setConfirmPassword("");
   };
 
   const handleSave = () => {
     const { id } = selectedAdministrateur;
     
+    if (newPassword !== confirmPassword) {
+      // Afficher un message d'erreur ou une notification
+      console.error("Les mots de passe ne correspondent pas");
+      return;
+    }
+
     const updatedData = {
       nom: modifiedNom,
       prenom: modifiedPrenom,
       email: modifiedEmail,
+      password: newPassword, // Nouveau mot de passe
     };
-  
+
     axios.put(`http://127.0.0.1:8000/api/UpdateGestionnaire/${id}`, updatedData)
       .then(() => {
         window.location.href = '/dashboard-directeur/listGestionnaire';
@@ -191,6 +206,44 @@ function ListeAdministrateurs() {
                   className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
                   placeholder="Entrez l'email modifié"
                 />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="newPassword" className="block text-sm font-semibold mb-1">Nouveau mot de passe:</label>
+                <div className="relative">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    id="newPassword"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+                    placeholder="Entrez le nouveau mot de passe"
+                  />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
+                  </button>
+                </div>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-1">Confirmez le mot de passe:</label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+                    placeholder="Confirmez le mot de passe"
+                  />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                  </button>
+                </div>
               </div>
               <div className="flex justify-between">
                 <button onClick={handleSave} className="mt-4 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
