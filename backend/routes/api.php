@@ -35,7 +35,8 @@ Route::group([
     Route::put('/UpdateDemande/{id}', [DemandeController::class, 'update']);
     Route::delete('/DeleteDemande/{id}', [DemandeController::class, 'destroy']);
     Route::put('/demandes/{id}/update-status', [DemandeController::class, 'updateStatus']);
-    Route::get('stagiaire/{id}/demande', [DemandeController::class, 'getDemandeByStagiaireId']);
+    Route::get('/stagiaire/{id}/demande', [DemandeController::class, 'getDemandeByStagiaireId']);
+    Route::get('/stagiaire/{id}/demandes', [DemandeController::class, 'getDemandesByStagiaireId']);
     
     // Administrateurs
     Route::post('/AddGestionnaire', [UserController::class, 'store']);

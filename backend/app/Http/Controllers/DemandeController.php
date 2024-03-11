@@ -81,21 +81,37 @@ class DemandeController extends Controller
         }
     }
 
-
     public function getDemandeByStagiaireId($id)
-    {
-        try {
-            // Récupérer la demande du stagiaire par son ID
-            $demande = Demande::where('stagiaire_id', $id)->first();
+{
+    try {
+        // Récupérer la dernière demande du stagiaire par son ID
+        $demande = Demande::where('stagiaire_id', $id)->orderBy('created_at', 'desc')->first();
 
-            // Vérifier si la demande existe
-            if ($demande) {
-                return response()->json($demande, 200);
-            } else {
-                return response()->json(['message' => 'Aucune demande trouvée pour ce stagiaire.'], 404);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
+        // Vérifier si la demande existe
+        if ($demande) {
+            return response()->json($demande, 200);
+        } else {
+            return response()->json(['message' => 'Aucune demande trouvée pour ce stagiaire.'], 404);
         }
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
     }
+}
+
+public function getDemandesByStagiaireId($id)
+{
+    try {
+        // Récupérer toutes les demandes du stagiaire par son ID
+        $demandes = Demande::where('stagiaire_id', $id)->get();
+
+        // Vérifier si des demandes existent
+        if ($demandes->count() > 0) {
+            return response()->json($demandes, 200);
+        } else {
+            return response()->json(['message' => 'Aucune demande trouvée pour ce stagiaire.'], 404);
+        }
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
+    }
+}
 }
