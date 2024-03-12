@@ -48,8 +48,8 @@ const SignUp = () => {
                 alert("Compte créé avec succès");
                 window.location = "/";
             }
-        }).catch((error) => {
-            console.log(error);
+        }).catch(() => {
+            setError('Les données doivent être uniques');
         });
 
         setFormData({
@@ -135,9 +135,9 @@ const SignUp = () => {
                                 value={password_confirmation}
                             />
                         </div>
-                        <span className='text-red-500 text-sm mb-2'>{error}</span>
+                        <span className='text-red-500 text-lg mb-2'>{error}</span>
                         <div className="w-full text-center mt-2">
-                            <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline">S&apos;authentifier</button>
+                            <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline">S&apos;inscrire</button>
                             <p className=" items-center mt-2 text-base">
                             Vous avez déjà un compte? <a href="/" className="text-green-500 hover:text-green-600">Se connecter</a>
                             </p>

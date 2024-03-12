@@ -16,14 +16,13 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
     // Stagiaire Auth
     Route::post('/register', [StagiaireAuthController::class, 'register']);
     Route::post('/loginStg', [StagiaireAuthController::class, 'login']);
     Route::post('/logout', [StagiaireAuthController::class, 'logout']);
 });
-    // stagiaires
+// stagiaires
     Route::get('/stagiaires', [StagiaireController::class, 'index']);
     Route::post('/AddStagiaire', [StagiaireController::class, 'store']);
     Route::delete('/DeleteStagiaires/{CIN}', [StagiaireController::class, 'destroy']);
@@ -43,3 +42,4 @@ Route::group([
     Route::get('/gestionnaires', [UserController::class, 'index']);
     Route::delete('/DeleteGestionnaire/{id}', [UserController::class, 'destroy']);
     Route::put('/UpdateGestionnaire/{id}', [UserController::class, 'update']);
+    Route::get('/gestionnaires/{id}/user-profile', [UserController::class, 'getUserProfile']);

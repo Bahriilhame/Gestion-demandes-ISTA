@@ -5,13 +5,14 @@ import DashboardGest from './DashboardGest';
 import './index.css';
 import ListStagiaires from './Components/ListStagiaires';
 import ListDemandes from './Components/ListDemandes';
-import FormStagiaire from './Components/FormStagiaire';
+// import FormStagiaire from './Components/FormStagiaire';
 import AddGestionnaire from './Components/AddGestionnaire';
 import ListeGestionnaires from './Components/ListeGestionnaires';
 import Login from './Stagiaires/Login';
 import LoginAdmin from './Components/LoginAdmin';
 import SignUp from './Stagiaires/signup';
 import HomeStagiaire from './Stagiaires/HomeStagiaire';
+import UserProfile from './UserProfile';
 // import NotFound from './NotFound';
  
 export default function RouteFunc() {
@@ -23,13 +24,13 @@ export default function RouteFunc() {
     }, [localStorage]);
 
     useEffect(() => {
-        if (window.location.pathname === '/app/ista') {
+        if (window.location.pathname == '/app/ista') {
             localStorage.removeItem("user");
         }
     }, [window.location.pathname]);
-
+    
     useEffect(() => {
-        if (window.location.pathname === '/') {
+        if (window.location.pathname == '/') {
             localStorage.removeItem("stagiaire");
         }
     }, [window.location.pathname]);
@@ -40,19 +41,21 @@ export default function RouteFunc() {
                 <div className="flex-grow">
                     <Routes>
                         <Route path='/' element={<Login />} />
-                        {role === 'directeur' ?
+                        {role == 'directeur' ?
                             <Route path='/dashboard-directeur' element={<DashboardDirect />}>
                                 <Route path="listDemandes" element={<ListDemandes />} />
                                 <Route path="listStagiaires" element={<ListStagiaires />} />
-                                <Route path="AddStagiaire" element={<FormStagiaire />} />
+                                {/* <Route path="AddStagiaire" element={<FormStagiaire />} /> */}
                                 <Route path="listGestionnaire" element={<ListeGestionnaires />} />
                                 <Route path="AddGestionnaire" element={<AddGestionnaire />} />
+                                <Route path="profile" element={<UserProfile />} />
                             </Route>
                             :
                             <Route path='/dashboard-gestionnaire' element={<DashboardGest />}>
                                 <Route path="listDemandes" element={<ListStagiaires />} />
-                                <Route path="AddStagiaire" element={<FormStagiaire />} />
+                                {/* <Route path="AddStagiaire" element={<FormStagiaire />} /> */}
                                 <Route path="listStagiaires" element={<ListStagiaires />} />
+                                <Route path="profile" element={<UserProfile />} />
                             </Route>
                         }
                         <Route path="/sign-up" element={<SignUp />} />

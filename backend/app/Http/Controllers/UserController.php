@@ -73,4 +73,29 @@ class UserController extends Controller{
         return response()->json(null, 204);
     }
 
+    public function getUserProfile($id)
+{
+    try {
+        // Récupérer le profil du gestionnaire par son ID
+        $gestionnaire = User::findOrFail($id);
+
+        // Vérifier si le gestionnaire existe
+        
+        if ($gestionnaire) {
+            return response()->json([
+                'access_token' => auth()->attempt($id),
+                'token_type' => 'bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60,
+                'user' => $gestionnaire
+            ]);
+            // return response()->json($gestionnaire, 200);
+        } else {
+            return response()->json(['message' => 'Gestionnaire introuvable.'], 404);
+        }
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Une erreur s\'est produite. Veuillez réessayer.'], 500);
+    }
+}
+
+
 }

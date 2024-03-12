@@ -31,7 +31,7 @@ function ListStagiaires() {
         setDemandes(reversedDemandes);
       })
       .catch((error) => console.error("Error fetching demandes:", error));
-
+      
     // Esc button
     const handleEscKeyPress = (event) => {
       if (event.keyCode === 27) {
@@ -131,7 +131,7 @@ function ListStagiaires() {
     const filteredDemandesBysomething = filteredDemandes.filter(demande =>
     (!filterType || demande.typeDemande === filterType) &&
     (!filterStatus || demande.status === filterStatus)
-  );
+  ).sort((a, b) => new Date(b.dateSoumission) - new Date(a.dateSoumission));
 
   // Calculate indexes for pagination
   const indexOfLastItem = currentPage * itemsPerPage;
