@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { ToastContainer, toast,Slide  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +15,7 @@ export default function Toast(){
             theme: "light",
             transition: Slide,
         });
-    })
+    },[])
 
   return (
     <div>
