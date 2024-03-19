@@ -17,7 +17,7 @@ function AddGestionnaire() {
     const formData = { nom, prenom, email, password, role };
     axios.post("http://127.0.0.1:8000/api/AddGestionnaire", formData)
       .then(() => {
-          navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true } })
+          navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true,message:'Ajouter avec succès' } })
           window.location.reload()
       })
       .catch((error) => {

@@ -1,10 +1,13 @@
 //list stagiaire
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { XIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faKey, faSave, faSearch } from '@fortawesome/free-solid-svg-icons';
 import Stats from "./Stats";
+import { useNavigate } from "react-router-dom";
+import Toast from "./Toast";
+import { useLocation } from "react-router-dom";
 
 function ListStagiaires() {
   const [stagiaires, setStagiaires] = useState([]);
@@ -17,6 +20,13 @@ function ListStagiaires() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate=useNavigate()
+
+  const [msg,setMsg]=useState('')
+  const location = useLocation();
+  const [showNotification, setShowNotification] = useState(false);
+
+  const userData=useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user : null)
 
   useEffect(() => {
     document.title = "ISTA | Liste des demandes";
@@ -41,6 +51,11 @@ function ListStagiaires() {
       window.removeEventListener('keydown', handleEscKeyPress);
     };
   }, []);
+
+  useEffect(() => {
+    setShowNotification(location.state && location.state.showNotification);
+    setMsg(location.state && location.state.message)
+  }, [location]);
 
   const openModal = (stagiaire) => {
     setSelectedStagiaire(stagiaire);
@@ -69,6 +84,13 @@ function ListStagiaires() {
       setNewPassword('');
       setConfirmPassword('');
       closeChangeModal();
+      if(userData[0].role=='directeur'){
+        navigate('/dashboard-directeur/listStagiaires', { state: { showNotification: true,message:'Changer avec succès'} })
+      }
+      else{
+        navigate('/dashboard-gestionnaire/listStagiaires', { state: { showNotification: true,message:'Changer avec succès'} })
+      }
+      window.location.reload()
     } catch (error) {
       console.error("Error changing password:", error.response);
       console.error("Error changing password:");
@@ -100,6 +122,7 @@ function ListStagiaires() {
       <br />
       <Stats />
       <div className="container mx-auto px-4 py-8">
+      {showNotification && <Toast message={msg}/>} 
         <h1 className="text-3xl font-bold mb-6">Liste des comptes stagiaires</h1>
         <div className="mb-4 relative">
           <input

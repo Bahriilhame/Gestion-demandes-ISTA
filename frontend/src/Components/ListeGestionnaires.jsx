@@ -8,6 +8,7 @@ import { faEye, faEyeSlash, faTrash, faSave } from '@fortawesome/free-solid-svg-
 import Toast from "./Toast";
 import { useLocation } from "react-router-dom";
 import Stats from "./Stats";
+import { useNavigate } from "react-router-dom";
 
 function ListeAdministrateurs() {
   const [administrateurs, setAdministrateurs] = useState([]);
@@ -22,11 +23,16 @@ function ListeAdministrateurs() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [msg,setMsg]=useState('')
+
+  const navigate = useNavigate();
+
   const location = useLocation();
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     setShowNotification(location.state && location.state.showNotification);
+    setMsg(location.state && location.state.message)
   }, [location]);
 
   useEffect(() => {
@@ -59,6 +65,8 @@ function ListeAdministrateurs() {
   const handleDelete = (id) => {
     axios.delete(`http://127.0.0.1:8000/api/DeleteGestionnaire/${id}`).then(() => {
       setAdministrateurs(prevAdministrateurs => prevAdministrateurs.filter(administrateur => administrateur.id !== id));
+      navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true,message:'Supprimer avec succès'} })
+      window.location.reload()
     })
     .catch((error) => {
       console.error("Erreur lors de la suppression de l'administrateur:", error);
@@ -99,7 +107,10 @@ function ListeAdministrateurs() {
 
     axios.put(`http://127.0.0.1:8000/api/UpdateGestionnaire/${id}`, updatedData)
       .then(() => {
-        window.location.href = '/dashboard-directeur/listGestionnaire';
+        // window.location.href = '/dashboard-directeur/listGestionnaire';
+        navigate('/dashboard-directeur/listGestionnaire', { state: { showNotification: true,message:'Modifier avec succès'} })
+        window.location.reload()
+  
         closeModal();
       })
       .catch((error) => {
@@ -120,7 +131,7 @@ function ListeAdministrateurs() {
         <br />
         <Stats/>
       <div className="container mx-auto px-4 py-8">
-              {showNotification && <Toast />} 
+          {showNotification && <Toast message={msg}/>} 
         <h1 className="text-3xl font-bold mb-6">Liste des gestionnaires</h1>
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
