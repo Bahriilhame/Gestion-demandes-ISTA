@@ -35,8 +35,8 @@ function NavbarProfile({ toggleNav, toggleDarkMode, darkMode }) {
             <h5 className={`${darkMode ? 'text-white' : 'text-gray-600'}`}>Tableau de bord</h5>
           </div>
           <div className="flex items-center">
-            <button onClick={toggleDarkMode} className={`text-gray-600 mr-3 hover:text-gray-700 focus:outline-none ${darkMode ? 'text-gray-300' : ''}`}>
-              {darkMode ? <SunIcon className="h-6 w-6 hover:text-white" /> : <MoonIcon className="h-6 w-6" />}
+            <button onClick={toggleDarkMode} title={`${darkMode ? 'Light Mode' : 'Dark Mode'}`} className={`text-gray-600 mr-3 hover:text-gray-700 focus:outline-none ${darkMode ? 'text-gray-300' : ''}`}>
+              {darkMode ? <SunIcon className="h-6 w-6 text-white" /> : <MoonIcon className="h-6 w-6" />}
             </button>
             <div className="relative" ref={dropdownRef}>
               <button onClick={toggleDropdown} className={`text-white px-4 hover:text-gray-300 focus:outline-none ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>

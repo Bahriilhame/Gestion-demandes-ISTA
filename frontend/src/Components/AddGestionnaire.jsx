@@ -26,8 +26,8 @@ function AddGestionnaire({darkMode}) {
   };
 
   return (
-    <div className={` bg-gray-100 ${darkMode ? 'dark bg-gray-800 text-white' : ''} flex justify-center items-center`}>
-      <div className="p-8 rounded-lg shadow-md w-full max-w-md ">
+    <div className={` ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-gray-100 '} flex justify-center items-center`}>
+      <div className={`p-8 rounded-lg shadow-md w-full max-w-md ${darkMode ? 'shadow-black ' :''}`}>
         <h2 className="text-2xl font-bold mb-4 text-center">Ajouter un gestionnaire</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -37,7 +37,7 @@ function AddGestionnaire({darkMode}) {
               id="nom"
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white'} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Nom"
             />
           </div>
@@ -48,7 +48,7 @@ function AddGestionnaire({darkMode}) {
               id="prenom"
               value={prenom}
               onChange={(e) => setPrenom(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white '} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Prénom"
             />
           </div>
@@ -59,7 +59,7 @@ function AddGestionnaire({darkMode}) {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white '} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Email"
             />
           </div>
@@ -70,7 +70,7 @@ function AddGestionnaire({darkMode}) {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white '} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Mot de passe"
             />
           </div>

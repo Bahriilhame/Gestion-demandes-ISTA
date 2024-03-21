@@ -26,20 +26,20 @@ function Stats({darkMode}) {
 
     return (
         <div className={`grid ${darkMode ? 'dark bg-gray-800' : ''} grid-cols-3 gap-4 mx-4`}>
-            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white shadow-lg border-gray-400 rounded-lg' : ''} shadow-lg p-2 rounded-lg`}>
+            <div className={`${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
                 <h2 className={`text-lg flex text-gray-500 ${darkMode ? 'text-white' : ''} items-center font-semibold mb-2`}>
                     <DocumentTextIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {DemandesDay.length} Demandes aujourd&apos;hui
                 </h2>
             </div>
-            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white shadow-lg border-gray-400 rounded-lg' : ''} shadow-lg p-2 rounded-lg`}>
-                <h2 className={`text-lg flex text-gray-500 ${darkMode ? 'text-white' : ''} items-center font-semibold mb-2`}>
+            <div className={` ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+                <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <UserIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Stagiaires.length} Stagiaires
                 </h2>
             </div>
-            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white shadow-lg border-gray-400 rounded-lg' : ''} shadow-lg p-2 rounded-lg`}>
-                <h2 className={`text-lg flex text-gray-500 ${darkMode ? 'text-white' : ''} items-center font-semibold mb-2`}>
+            <div className={`   ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+                <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <FolderIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Demandes.length} Total des demandes
                 </h2>

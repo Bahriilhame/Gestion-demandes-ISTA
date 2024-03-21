@@ -130,7 +130,7 @@ function ListStagiaires({darkMode}) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher par CIN, nom ou prénom"
-            className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white'} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
           />
           <FontAwesomeIcon icon={faSearch} className="absolute right-3 top-3 text-gray-400" />
         </div>
@@ -180,7 +180,7 @@ function ListStagiaires({darkMode}) {
         </div>
         {selectedStagiaire && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
+            <div className={`${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white'} p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
@@ -195,7 +195,7 @@ function ListStagiaires({darkMode}) {
 
         {selectedPassword && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
+            <div className={`${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white '}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeChangeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
@@ -218,7 +218,7 @@ function ListStagiaires({darkMode}) {
                 </div>
               </div>
               <div className="mb-4">
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirmer Mot de passe</label>
+                <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-1">Confirmer Mot de passe</label>
                 <div className="relative">
                   <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`} />
                   <button

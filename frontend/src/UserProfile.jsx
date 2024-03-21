@@ -79,7 +79,7 @@ export default function UserProfile({darkMode}) {
             id="nom"
             value={nom}
             onChange={(e) => setNom(e.target.value)}
-            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre nom"
           />
         </div>
@@ -90,7 +90,7 @@ export default function UserProfile({darkMode}) {
             id="prenom"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
-            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre prénom"
           />
         </div>
@@ -101,7 +101,7 @@ export default function UserProfile({darkMode}) {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre email"
           />
         </div>
@@ -113,7 +113,7 @@ export default function UserProfile({darkMode}) {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrez votre mot de passe"
             />
             <button
@@ -132,7 +132,7 @@ export default function UserProfile({darkMode}) {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300 ' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300 ' : ''} w-full px-4 py-2 border border-gray-300 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Confirmez votre mot de passe"
             />
             <button
