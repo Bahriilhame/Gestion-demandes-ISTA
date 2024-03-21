@@ -9,15 +9,21 @@ import { useState } from 'react';
 
 function DashboardGest() {
   const [isNavOpen, setIsNavOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => !prevMode);
+  };
+
   return (
-      <div className="flex h-screen bg-gray-100">
+    <div className={`flex h-screen ${darkMode ? 'dark' : ''}`}>
               {
         isNavOpen && (
-        <nav className="bg-[#00246B] text-white p-4">
+        <nav className={`bg-[#00246B] ${darkMode ? 'dark bg-gray-700 text-white' : ''} text-white p-4 transition-all duration-600 ease-in-out ${isNavOpen ? '' : '-translate-x-full'}`}>
           <ul className="flex flex-col">
             <div className="flex items-center align-middle mr-4 mb-8">
               <img src="/logo.png" alt="logo" className="w-12 h-12 mr-2" />
@@ -26,9 +32,6 @@ function DashboardGest() {
             <li className="mb-4">
               <Link to='/dashboard-gestionnaire/listDemandes' className="hover:text-gray-300">Liste des demandes</Link>
             </li>
-            {/* <li className="mb-4">
-              <Link to='/dashboard-gestionnaire/AddStagiaire' className="hover:text-gray-300">Form Ajout des stagiaires</Link>
-            </li>        */}
             <li className="mb-4">
               <Link to='/dashboard-gestionnaire/listStagiaires' className="hover:text-gray-300">Liste des stagiaires</Link>
             </li>
@@ -37,13 +40,13 @@ function DashboardGest() {
         </nav>
                 )
               }
-        <div className="flex-grow">
-        <NavbarProfile toggleNav={toggleNav}/>
+      <div className={`flex-grow ${darkMode ? 'dark bg-gray-800' : ''} bg-gray-100`}>
+        <NavbarProfile toggleNav={toggleNav} toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>
         <Routes>
-          <Route path='/listDemandes' element={<ListDemandes />}/>
+          <Route path='/listDemandes' element={<ListDemandes darkMode={darkMode} />}/>
           {/* <Route path='/AddStagiaire' element={<FormStagiaire />}/> */}
-          <Route path='/listStagiaires' element={<ListStagiaires />}/>
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path='/listStagiaires' element={<ListStagiaires darkMode={darkMode} />}/>
+          <Route path="/profile" element={<UserProfile darkMode={darkMode} />} />
         </Routes>
         </div>
       </div>

@@ -6,7 +6,7 @@ import Toast from "./Components/Toast";
 import { useNavigate } from "react-router-dom";
 import { UserIcon } from '@heroicons/react/outline';
 
-export default function UserProfile() {
+export default function UserProfile({darkMode}) {
     const [userData,setUserData] =useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user : null)
 
     const fetchData = async () => {
@@ -67,53 +67,53 @@ export default function UserProfile() {
 
   return (
     <div>
-      <div className="container mx-auto px-4 py-8 text-lg">
+      <div className={`container mx-auto px-4 py-8 text-lg ${darkMode ? 'dark bg-gray-800 text-lg' : ''}`}>
         {showNotification && <Toast />} 
-        <h1 className="text-3xl font-bold mb-6 flex align-bottom items-end">
+        <h1 className={`text-3xl font-bold mb-6 flex align-bottom items-end ${darkMode ? ' text-white' : ''}`}>
           <UserIcon className="w-10 text-blue-800"/>
           Profil</h1>
         <div className="mb-4">
-          <label htmlFor="nom" className="block  font-semibold mb-1">Nom:</label>
+          <label htmlFor="nom" className={`block ${darkMode ? ' text-white' : ''} font-semibold mb-1`}>Nom:</label>
           <input
             type="text"
             id="nom"
             value={nom}
             onChange={(e) => setNom(e.target.value)}
-            className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre nom"
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="prenom" className="block  font-semibold mb-1">Prénom:</label>
+          <label htmlFor="prenom" className={`block ${darkMode ? ' text-white' : ''} font-semibold mb-1`}>Prénom:</label>
           <input
             type="text"
             id="prenom"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
-            className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre prénom"
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block  font-semibold mb-1">Email:</label>
+          <label htmlFor="email" className={`block ${darkMode ? ' text-white' : ''} font-semibold mb-1`}>Email:</label>
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             placeholder="Entrez votre email"
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block  font-semibold mb-1">Mot de passe:</label>
+          <label htmlFor="password" className={`block ${darkMode ? ' text-white' : ''} font-semibold mb-1`}>Mot de passe:</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrez votre mot de passe"
             />
             <button
@@ -125,14 +125,14 @@ export default function UserProfile() {
           </div>
         </div>
         <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block  font-semibold mb-1">Confirmez le mot de passe:</label>
+          <label htmlFor="confirmPassword" className={`block ${darkMode ? ' text-white' : ''} font-semibold mb-1`}>Confirmez le mot de passe:</label>
           <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-gray-300 ' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Confirmez votre mot de passe"
             />
             <button

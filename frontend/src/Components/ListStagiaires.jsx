@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Toast from "./Toast";
 import { useLocation } from "react-router-dom";
 
-function ListStagiaires() {
+function ListStagiaires({darkMode}) {
   const [stagiaires, setStagiaires] = useState([]);
   const [selectedStagiaire, setSelectedStagiaire] = useState(null);
   const [selectedPassword, setSelectedPassword] = useState(null);
@@ -120,24 +120,24 @@ function ListStagiaires() {
   return (
     <div>
       <br />
-      <Stats />
-      <div className="container mx-auto px-4 py-8">
+      <Stats darkMode={darkMode}/>
+      <div className={`container mx-auto px-4 py-8  ${darkMode ? 'dark bg-gray-800' : ''}`}>
       {showNotification && <Toast message={msg}/>} 
-        <h1 className="text-3xl font-bold mb-6">Liste des comptes stagiaires</h1>
+        <h1 className={`text-3xl font-bold mb-6  ${darkMode ? ' text-white' : ''}`}>Liste des comptes stagiaires</h1>
         <div className="mb-4 relative">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher par CIN, nom ou prénom"
-            className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
           />
           <FontAwesomeIcon icon={faSearch} className="absolute right-3 top-3 text-gray-400" />
         </div>
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
-              <tr className="bg-gray-200">
+            <tr className={`bg-gray-200 ${darkMode ? 'dark bg-gray-600 text-white' : ''}`}>
                 <th className="px-4 py-2">Stagiaire</th>
                 <th className="px-4 py-2">CIN</th>
                 <th className="px-4 py-2">Email</th>
@@ -146,7 +146,7 @@ function ListStagiaires() {
             </thead>
             <tbody>
               {currentItems.map((s) => (
-                <tr key={s.id} className="text-gray-700">
+                <tr key={s.id} className={`text-gray-700 ${darkMode ? 'dark bg-gray-800 text-white' : ''}`}>
                   <td className="border px-4 py-2">{s.nom + ' ' + s.prenom}</td>
                   <td className="border px-4 py-2">{s.CIN}</td>
                   <td className="border px-4 py-2">{s.email}</td>
@@ -180,7 +180,7 @@ function ListStagiaires() {
         </div>
         {selectedStagiaire && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
@@ -195,7 +195,7 @@ function ListStagiaires() {
 
         {selectedPassword && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeChangeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
@@ -205,7 +205,7 @@ function ListStagiaires() {
               <div className="mb-4">
                 <label htmlFor="newPassword" className="block text-sm font-semibold mb-1">Nouveau Mot de passe</label>
                 <div className="relative">
-                  <input type={showNewPassword ? "text" : "password"} id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                  <input type={showNewPassword ? "text" : "password"} id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`} />
                   <button
                     className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
                     onClick={(e) => {
@@ -220,7 +220,7 @@ function ListStagiaires() {
               <div className="mb-4">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirmer Mot de passe</label>
                 <div className="relative">
-                  <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300" />
+                  <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`} />
                   <button
                     className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500"
                     onClick={(e) => {

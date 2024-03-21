@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import Toast from "./Toast";
 import Stats from "./Stats";
 
-function ListStagiaires() {
+function ListStagiaires({darkMode}) {
   const [Demandes, setDemandes] = useState([]);
   const [selectedDemande, setSelectedDemande] = useState(null);
   const [filterType, setFilterType] = useState("");
@@ -81,11 +81,11 @@ function ListStagiaires() {
 
   const getBackgroundColor = (demande) => {
     if (demande === "Attestation de poursuite") {
-      return "bg-green-500 bg-opacity-20 ";
+      return `bg-green-500 bg-opacity-20 ${darkMode ? 'bg-green-800 bg-opacity-100' : ''}`;
     } else if (demande === "Attestation interruption") {
-      return "bg-red-500 bg-opacity-20";
+      return `bg-red-500 bg-opacity-20 ${darkMode ? 'bg-red-800 bg-opacity-100' : ''}`;
     } else if (demande === "Releve de note") {
-      return "bg-yellow-500 bg-opacity-20";
+      return `bg-yellow-500 bg-opacity-20 ${darkMode ? 'bg-yellow-300 bg-opacity-100' : ''}`;
     }
     return "bg-gray-200";
   };
@@ -149,16 +149,16 @@ function ListStagiaires() {
 
 
   return (
-    <div>
+    <div className={`${darkMode ? 'dark bg-gray-800' : ''}`}>
       <br />
-      <Stats />
-      <div className="container mx-auto px-4 py-8">
+      <Stats darkMode={darkMode}/>
+      <div className={`container mx-auto px-4 py-8  ${darkMode ? 'dark bg-gray-800' : ''}`}>
         {showNotification && <Toast />}
-        <h1 className="text-3xl font-bold mb-6">Liste des demandes</h1>
+        <h1 className={`text-3xl font-bold mb-6  ${darkMode ? ' text-white' : ''}`}>Liste des demandes</h1>
         <div className="mb-4 flex space-x-4">
           <div className="flex-1">
             <select
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               value={filterType}
               onChange={(e) => filterByType(e.target.value)}
             >
@@ -170,7 +170,7 @@ function ListStagiaires() {
           </div>
           <div  className="flex-1">
             <select
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`block ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               value={filterStatus}
               onChange={(e) => filterByStatus(e.target.value)}
             >
@@ -183,8 +183,8 @@ function ListStagiaires() {
         </div>
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
-            <thead>
-              <tr className="bg-gray-200">
+            <thead >
+              <tr className={`bg-gray-200 ${darkMode ? 'dark bg-gray-600 text-white' : ''}`}>
                 <th className="px-4 py-2">Stagiaire</th>
                 <th className="px-4 py-2">CIN</th>
                 <th className="px-4 py-2">Filiere</th>
@@ -196,7 +196,7 @@ function ListStagiaires() {
             </thead>
             <tbody>
               {currentItems.map((s) => (
-                <tr key={s.id} className="text-gray-700">
+                <tr key={s.id} className={`text-gray-700 ${darkMode ? 'dark bg-gray-800 text-white' : ''}`}>
                   <td className="border px-4 py-2">{s.stagiaire.nom + ' ' + s.stagiaire.prenom}</td>
                   <td className="border px-4 py-2">{s.stagiaire.CIN}</td>
                   <td className="border px-4 py-2">{s.stagiaire.filiere}</td>
@@ -210,7 +210,7 @@ function ListStagiaires() {
                     <select
                       value={s.status}
                       onChange={(e) => updateDemandeStatus(s.id, e.target.value)}
-                      className="block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={`block ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                     >
                       <option value="En cours de traitement">En attente</option>
                       <option value="Approuvé">Approuvé</option>
@@ -246,7 +246,7 @@ function ListStagiaires() {
         </div>
         {selectedDemande && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''} p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
@@ -267,7 +267,7 @@ function ListStagiaires() {
                     <select
                         value={demande.status}
                         onChange={(e) => updateDemandeStatus(demande.id, e.target.value)}
-                        className="px-4 w-fit py-2 ml-4 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className={`px-4 ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-fit py-2 ml-4 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                       >
                         <option value="En cours de traitement">En attente</option>
                         <option value="Approuvé">Approuvé</option>

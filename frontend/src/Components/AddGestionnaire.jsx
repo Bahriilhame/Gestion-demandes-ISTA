@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function AddGestionnaire() {
+function AddGestionnaire({darkMode}) {
   const navigate = useNavigate();
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
@@ -26,8 +26,8 @@ function AddGestionnaire() {
   };
 
   return (
-    <div className=" bg-gray-100 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md ">
+    <div className={` bg-gray-100 ${darkMode ? 'dark bg-gray-800 text-white' : ''} flex justify-center items-center`}>
+      <div className="p-8 rounded-lg shadow-md w-full max-w-md ">
         <h2 className="text-2xl font-bold mb-4 text-center">Ajouter un gestionnaire</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -37,7 +37,7 @@ function AddGestionnaire() {
               id="nom"
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className="input w-[100%] h-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Nom"
             />
           </div>
@@ -48,7 +48,7 @@ function AddGestionnaire() {
               id="prenom"
               value={prenom}
               onChange={(e) => setPrenom(e.target.value)}
-              className="input w-[100%] h-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Prénom"
             />
           </div>
@@ -59,7 +59,7 @@ function AddGestionnaire() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input w-[100%] h-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Email"
             />
           </div>
@@ -70,7 +70,7 @@ function AddGestionnaire() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input w-[100%] h-10"
+              className={`block  ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
               placeholder="Entrer votre Mot de passe"
             />
           </div>

@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 import Stats from "./Stats";
 import { useNavigate } from "react-router-dom";
 
-function ListeAdministrateurs() {
+function ListeAdministrateurs({darkMode}) {
   const [administrateurs, setAdministrateurs] = useState([]);
   const [selectedAdministrateur, setSelectedAdministrateur] = useState(null);
   const [modifiedNom, setModifiedNom] = useState("");
@@ -127,16 +127,16 @@ function ListeAdministrateurs() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className={`${darkMode ? 'dark bg-gray-800' : ''}`}>
         <br />
-        <Stats/>
-      <div className="container mx-auto px-4 py-8">
+        <Stats darkMode={darkMode}/>
+        <div className={`container mx-auto px-4 py-8  ${darkMode ? 'dark bg-gray-800' : ''}`}>
           {showNotification && <Toast message={msg}/>} 
-        <h1 className="text-3xl font-bold mb-6">Liste des gestionnaires</h1>
+        <h1 className={`text-3xl font-bold mb-6  ${darkMode ? ' text-white' : ''}`}>Liste des gestionnaires</h1>
         <div className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
-              <tr className="bg-gray-200">
+              <tr className={`bg-gray-200 ${darkMode ? 'dark bg-gray-600 text-white' : ''}`}>
                 <th className="px-4 py-2">Nom</th>
                 <th className="px-4 py-2">Prénom</th>
                 <th className="px-4 py-2">Email</th>
@@ -145,7 +145,7 @@ function ListeAdministrateurs() {
             </thead>
             <tbody>
               {currentItems.map((administrateur) => (
-                <tr key={administrateur.id} className="text-gray-700">
+                <tr key={administrateur.id} className={`text-gray-700 ${darkMode ? 'dark bg-gray-800 text-white' : ''}`}>
                   <td className="border px-4 py-2">{administrateur.nom}</td>
                   <td className="border px-4 py-2">{administrateur.prenom}</td>
                   <td className="border px-4 py-2">{administrateur.email}</td>
@@ -179,7 +179,7 @@ function ListeAdministrateurs() {
         </div>
         {selectedAdministrateur && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+            <div className={`bg-white ${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true"/>
@@ -193,7 +193,7 @@ function ListeAdministrateurs() {
                   id="modifiedNom"
                   value={modifiedNom}
                   onChange={(e) => setModifiedNom(e.target.value)}
-                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`}
                   placeholder="Entrez le nom modifié"
                 />
               </div>
@@ -204,7 +204,7 @@ function ListeAdministrateurs() {
                   id="modifiedPrenom"
                   value={modifiedPrenom}
                   onChange={(e) => setModifiedPrenom(e.target.value)}
-                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`}
                   placeholder="Entrez le prénom modifié"
                 />
               </div>
@@ -215,7 +215,7 @@ function ListeAdministrateurs() {
                   id="modifiedEmail"
                   value={modifiedEmail}
                   onChange={(e) => setModifiedEmail(e.target.value)}
-                  className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300"
+                  className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300`}
                   placeholder="Entrez l'email modifié"
                 />
               </div>
@@ -227,7 +227,7 @@ function ListeAdministrateurs() {
                     id="newPassword"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+                    className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10`}
                     placeholder="Entrez le nouveau mot de passe"
                   />
                   <button
@@ -246,7 +246,7 @@ function ListeAdministrateurs() {
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="input w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10"
+                    className={`input ${darkMode ? 'dark bg-gray-800 text-white' : ''} w-full h-10 text-gray-500 border rounded-md px-3 border-gray-300 pr-10`}
                     placeholder="Confirmez le mot de passe"
                   />
                   <button
