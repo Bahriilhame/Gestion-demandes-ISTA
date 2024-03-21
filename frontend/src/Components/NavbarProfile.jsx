@@ -43,7 +43,7 @@ function NavbarProfile({ toggleNav, toggleDarkMode, darkMode }) {
                 <UserCircleIcon className={`h-8 w-8 ${darkMode ? 'text-white' : 'text-[#00246B]'}`} />
               </button>
               {dropdownOpen && (
-                <div className={`absolute right-0 mt-2 bg-white dark:bg-gray-700 rounded shadow-lg ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                <div className={`absolute right-0 mt-2 bg-white rounded shadow-lg ${darkMode ? 'dark:bg-gray-700 text-gray-300' : 'text-gray-800'}`}>
                   <Link to={`/dashboard-${userData.role}/profile`} className={`block px-4 py-2 hover:bg-gray-200 ${darkMode ? ' hover:text-gray-800' : ''}`}>{userData.nom + ' ' + userData.prenom}</Link>
                   <Link onClick={() => { localStorage.removeItem("user") }} to="/app/ista" className="block px-4 py-2 text-red-500 font-bold hover:bg-gray-200">Déconnexion</Link>
                 </div>
