@@ -28,7 +28,7 @@ class StagiaireController extends Controller{
             'filiere' => 'required|string',
             'groupe' => 'required|integer',
             'anneeScolaire' => 'required|integer',
-            'email' => 'required|string|email|max:30|unique:users',
+            'email' => 'required|string|email|max:30|unique:stagiaires',
             'password' => 'required|string|confirmed|min:6',
             'typeDemande' => 'required|string',
         ]);

@@ -7,6 +7,28 @@ function Demande() {
     : null;
   const id = userData.id;
 
+  const filieres = [
+    "Développement Informatique",
+    "Réseaux et Sécurité (REASU)",
+    "Génie Civil",
+    "Génie Électrique",
+    "Génie Mécanique",
+    "Gestion des Entreprises",
+    "Électronique et Électrotechnique",
+    "Télécommunications",
+    "Maintenance Industrielle",
+    "Gestion des Ressources Humaines",
+    "Logistique et Transport",
+    "Techniques de Vente et de Gestion Commerciale",
+    "Techniques de Secrétariat Bureautique",
+    "Techniques Comptables et Financières",
+    "Qualité, Hygiène, Sécurité, Environnement (QHSE)",
+    "Marketing et Commerce International",
+    "Gestion Hôtelière",
+    "Techniques des Industries Agroalimentaires",
+    "Gestion de la Production Culinaire",
+  ];
+
   const [formData, setFormData] = useState({
     filiere: "",
     groupe: "",
@@ -48,13 +70,17 @@ function Demande() {
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
       <div className="mb-4">
         <label className="block mb-1">Filière:</label>
-        <input
-          type="text"
+        <select
           name="filiere"
           value={formData.filiere}
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-        />
+        >
+          <option value="">Choisir votre filière</option>
+          {filieres.map((filiere, index) => (
+            <option className="" key={index} value={filiere}>{filiere}</option>
+          ))}
+        </select>
       </div>
       <div className="mb-4">
         <label className="block mb-1">Groupe:</label>

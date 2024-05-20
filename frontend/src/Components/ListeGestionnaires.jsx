@@ -179,7 +179,7 @@ function ListeAdministrateurs({darkMode}) {
         </div>
         {selectedAdministrateur && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className={`${darkMode ? 'dark bg-gray-800 text-white' : ''}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
+            <div className={`${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white'}  p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
               <button onClick={closeModal} className="absolute top-2 right-2">
                 <span title="Fermer">
                   <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true"/>
