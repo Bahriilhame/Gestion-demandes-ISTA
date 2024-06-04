@@ -107,7 +107,7 @@ function DashboardDirect() {
                 <Link to='/dashboard-directeur/listGestionnaire' className="hover:text-gray-300">Liste des Gestionnaires</Link>
               </li>
               <li className="mb-4">
-                <Link to='/dashboard-directeur/AddGestionnaire' className="hover:text-gray-300">Form Ajout des Gestionnaires</Link>
+                <Link to='/dashboard-directeur/AddGestionnaire' className="hover:text-gray-300">Ajouter un gestionnaire</Link>
               </li>
             </ul>
           </nav>

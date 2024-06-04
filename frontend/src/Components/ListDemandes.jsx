@@ -82,9 +82,9 @@ function ListStagiaires({darkMode}) {
   const getBackgroundColor = (demande) => {
     if (demande === "Attestation de poursuite") {
       return `${darkMode ? 'bg-green-300 bg-opacity-90' : 'bg-green-500 bg-opacity-20 '}`;
-    } else if (demande === "Attestation interruption") {
+    } else if (demande === "Attestation d'interruption") {
       return `${darkMode ? 'bg-red-400 bg-opacity-90' : 'bg-red-500 bg-opacity-20 '}`;
-    } else if (demande === "Releve de note") {
+    } else if (demande === "Relevé de note") {
       return `${darkMode ? 'bg-yellow-300 bg-opacity-90' : 'bg-yellow-500 bg-opacity-20 '}`;
     }
     return "bg-gray-200";
@@ -164,8 +164,8 @@ function ListStagiaires({darkMode}) {
             >
               <option value="">Tous les types de demande</option>
               <option value="Attestation de poursuite">Attestation de poursuite</option>
-              <option value="Attestation interruption">Attestation interruption</option>
-              <option value="Releve de note">Releve de note</option>
+              <option value="Attestation d'interruption">Attestation d&apos;interruption</option>
+              <option value="Relevé de note">Relevé de note</option>
             </select>
           </div>
           <div  className="flex-1">
@@ -187,10 +187,10 @@ function ListStagiaires({darkMode}) {
               <tr className={`${darkMode ? 'dark bg-gray-600 text-white' : 'bg-gray-200 '}`}>
                 <th className="px-4 py-2">Stagiaire</th>
                 <th className="px-4 py-2">CIN</th>
-                <th className="px-4 py-2">Filiere</th>
+                <th className="px-4 py-2">Filière</th>
                 <th className="px-4 py-2">Type d&apos;attestation</th>
-                <th className="px-4 py-2">Demande a</th>
-                <th className="px-4 py-2">Status</th>
+                <th className="px-4 py-2">Demandé à</th>
+                <th className="px-4 py-2">Statut</th>
                 <th className="px-4 py-2">Action</th>
               </tr>
             </thead>
@@ -254,7 +254,7 @@ function ListStagiaires({darkMode}) {
               </button>
               <h2 className="text-xl font-bold mb-4">{selectedDemande.stagiaire.nom + ' ' + selectedDemande.stagiaire.prenom}</h2>
               <p><strong>CIN :</strong> {selectedDemande.stagiaire.CIN}</p>
-              <p><strong>Filiere :</strong> {selectedDemande.stagiaire.filiere}</p>
+              <p><strong>Filière :</strong> {selectedDemande.stagiaire.filiere}</p>
               <p><strong>Groupe :</strong> {selectedDemande.stagiaire.groupe}</p>
               <p><strong>Année Scolaire :</strong> {selectedDemande.stagiaire.anneeScolaire}</p>
               <h3 className="text-lg font-semibold mt-4 mb-2">Demandes :</h3>
@@ -263,7 +263,7 @@ function ListStagiaires({darkMode}) {
                   <p><strong>Date de Soumission :</strong> {formatDate(demande.dateSoumission)}</p>
                   <p><strong>Type de demande :</strong> {demande.typeDemande}</p>
                   <div className="flex">
-                    <p className="w-full"><strong>Status :</strong>
+                    <p className="w-full"><strong>Statut :</strong>
                     <select
                         value={demande.status}
                         onChange={(e) => updateDemandeStatus(demande.id, e.target.value)}

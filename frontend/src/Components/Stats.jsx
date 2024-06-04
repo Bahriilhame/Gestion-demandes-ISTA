@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { DocumentTextIcon, UserIcon, FolderIcon } from '@heroicons/react/outline';
+import { Link } from "react-router-dom";
 
 function Stats({darkMode}) {
     const [Demandes, setDemandes] = useState([]);
@@ -32,18 +33,18 @@ function Stats({darkMode}) {
                     {DemandesDay.length} Demandes aujourd&apos;hui
                 </h2>
             </div>
-            <div className={` ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+            <Link to='/dashboard-directeur/listStagiaires' className={` ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
                 <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <UserIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Stagiaires.length} Stagiaires
                 </h2>
-            </div>
-            <div className={`   ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+            </Link>
+            <Link to='/dashboard-directeur/listDemandes' className={`   ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
                 <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <FolderIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Demandes.length} Total des demandes
                 </h2>
-            </div>
+            </Link>
         </div>
     );
 }
