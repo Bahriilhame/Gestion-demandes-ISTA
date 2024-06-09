@@ -7,6 +7,12 @@ function Stats({darkMode}) {
     const [Demandes, setDemandes] = useState([]);
     const [Stagiaires, setStagiaires] = useState([]);
     const [DemandesDay, setDemandesDay] = useState([]);
+    const [role, setRole] = useState(null);
+
+    useEffect(() => {
+        const userRole = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.role : null;
+        setRole(userRole);
+    }, [localStorage]);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/demandes")
@@ -33,13 +39,13 @@ function Stats({darkMode}) {
                     {DemandesDay.length} Demandes aujourd&apos;hui
                 </h2>
             </div>
-            <Link to='/dashboard-directeur/listStagiaires' className={` ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+            <Link to={`${role== 'directeur' ? '/dashboard-directeur/listStagiaires' : '/dashboard-gestionnaire/listStagiaires'}`} className={` ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
                 <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <UserIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Stagiaires.length} Stagiaires
                 </h2>
             </Link>
-            <Link to='/dashboard-directeur/listDemandes' className={`   ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
+            <Link to={`${role== 'directeur' ? '/dashboard-directeur/listDemandes' : '/dashboard-gestionnaire/listDemandes'}`} className={`   ${darkMode ? 'dark bg-gray-800 text-white shadow-lg shadow-black border-gray-400 rounded-lg' : 'bg-white'} shadow-lg p-2 rounded-lg`}>
                 <h2 className={`text-lg flex  ${darkMode ? 'text-white' : 'text-gray-500'} items-center font-semibold mb-2`}>
                     <FolderIcon className='w-6 h-6 text-blue-800 mr-2' />
                     {Demandes.length} Total des demandes

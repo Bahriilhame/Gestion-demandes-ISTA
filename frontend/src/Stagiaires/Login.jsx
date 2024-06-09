@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link,useNavigate } from 'react-router-dom';
 import NavIsta from '../NavIsta'
 import Footer from '../Footer';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import { useLocation } from "react-router-dom";
+import Toast from "../Components/Toast";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,6 +13,18 @@ const Login = () => {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate=useNavigate()
+
+    const location = useLocation();
+    const [showNotification, setShowNotification] = useState(false);
+
+    const [msg,setMsg]=useState('')
+
+    useEffect(() => {
+        console.log(location);
+        setShowNotification(location.state && location.state.showNotification);
+        setMsg(location.state && location.state.message)
+
+      }, [location]);
 
 const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +55,8 @@ const handleSubmit = async (e) => {
         <div className='overflow-hidden bg-gray-100'>
             <NavIsta/>
             <div className=" bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            {showNotification && <Toast message={msg}/>}
+
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900">Connexion</h2>
             </div>

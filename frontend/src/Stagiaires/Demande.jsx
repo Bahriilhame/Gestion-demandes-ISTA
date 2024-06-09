@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Demande() {
   const userData = localStorage.getItem("stagiaire")
@@ -7,6 +8,7 @@ function Demande() {
     : null;
   const id = userData.id;
 
+  const navigate = useNavigate();
   const filieres = [
     "Développement Informatique",
     "Réseaux et Sécurité (REASU)",
@@ -51,7 +53,8 @@ function Demande() {
         formData
       );
       if (response.status === 200) {
-        alert("Demande envoyer avec succès");
+        navigate('/home', { state: { showNotification: true,message:'Demande envoyer avec succès' } })
+        window.location.reload()
         setFormData({
           filiere: "",
           groupe: "",
@@ -111,13 +114,13 @@ function Demande() {
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
         >
           <option value="">Choisir le type de demande</option>
-          <option value="Attestation interruption">
-            Attestation interruption
+          <option value="Attestation d'interruption">
+            Attestation d&apos;interruption
           </option>
           <option value="Attestation de poursuite">
             Attestation de poursuite
           </option>
-          <option value="Releve de note">Releve de note</option>
+          <option value="Relevé de note">Relevé de note</option>
         </select>
       </div>
       <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600 transition duration-300">Demander</button>

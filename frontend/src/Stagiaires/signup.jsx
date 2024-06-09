@@ -2,8 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import NavIsta from '../NavIsta';
 import Footer from '../Footer';
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+
     const [error,setError]=useState(null)
     const [formData, setFormData] = useState({
         CIN: '',
@@ -45,8 +48,10 @@ const SignUp = () => {
         axios.post('http://127.0.0.1:8000/api/auth/register', formData)
         .then((res) => {
             if (res.status === 201) {
-                alert("Compte créé avec succès");
-                window.location = "/";
+                // alert("Compte créé avec succès");
+                // window.location = "/";
+                navigate('/', { state: { showNotification: true,message:'Compte créé avec succès' } })
+                window.location.reload()
             }
         }).catch(() => {
             setError('Les données doivent être uniques');

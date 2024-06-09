@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Demande from './Demande'
+import { useLocation } from "react-router-dom";
+import Toast from "../Components/Toast";
 
 
 function HomeStagiaire() {
@@ -12,9 +14,21 @@ function HomeStagiaire() {
     const [demandeStatus, setDemandeStatus] = useState(null);
     const [allDemandes, setAllDemandes] = useState([]);
 
+    const location = useLocation();
+    const [showNotification, setShowNotification] = useState(false);
+
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
+
+    const [msg,setMsg]=useState('')
+
+    useEffect(() => {
+        console.log(location);
+        setShowNotification(location.state && location.state.showNotification);
+        setMsg(location.state && location.state.message)
+
+      }, [location]);
 
     useEffect(() => {
         if (userData) {
@@ -77,6 +91,8 @@ function HomeStagiaire() {
                     </div>
                 </div>
             </nav>
+            {console.log(showNotification)}
+            {showNotification && <Toast message={msg}/>}
             {demandeStatus ? (
                 <div className={`text-center p-4 shadow-md ${
                     demandeStatus === "En cours de traitement" ? "bg-yellow-300" :

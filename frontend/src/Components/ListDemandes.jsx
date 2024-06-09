@@ -10,6 +10,7 @@ import Stats from "./Stats";
 function ListStagiaires({darkMode}) {
   const [Demandes, setDemandes] = useState([]);
   const [selectedDemande, setSelectedDemande] = useState(null);
+  const [selectedDemandeDelete, setSelectedDemandeDelete] = useState(null);
   const [filterType, setFilterType] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,6 +37,7 @@ function ListStagiaires({darkMode}) {
     const handleEscKeyPress = (event) => {
       if (event.keyCode === 27) {
         closeModal();
+        closeDeleteModal();
       }
     };
 
@@ -63,11 +65,13 @@ function ListStagiaires({darkMode}) {
     setFilterStatus(status);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id,selectedDemande) => {
     axios.delete(`http://127.0.0.1:8000/api/DeleteDemande/${id}`).then(() => {
-      setDemandes(prevDemandes => prevDemandes.filter(demande => demande.id !== id));
+      console.log(selectedDemande);
+      setSelectedDemandeDelete(selectedDemande.length>1 ? selectedDemande.filter(demande => demande.id !== id) : selectedDemande);
+      fetchHistory(selectedDemande.stagiaire_id);
     })
-      .catch((error) => console.error("Error deleting stagiaire:", error));
+      .catch((error) => console.error("Error deleting demande:", error));
   };
 
   const openModal = (demande) => {
@@ -77,6 +81,15 @@ function ListStagiaires({darkMode}) {
 
   const closeModal = () => {
     setSelectedDemande(null);
+  };
+
+  const openDeleteModal = (demande) => {
+    setSelectedDemandeDelete(demande);
+    fetchHistory(demande.stagiaire_id);
+  };
+
+  const closeDeleteModal = () => {
+    setSelectedDemandeDelete(null);
   };
 
   const getBackgroundColor = (demande) => {
@@ -121,7 +134,7 @@ function ListStagiaires({darkMode}) {
   // Filter only the latest request for each student
   const filteredDemandes = Object.values(
     Demandes.reduce((acc, demande) => {
-      if (!acc[demande.stagiaire.id] || acc[demande.stagiaire.id].dateSoumission < demande.dateSoumission) {
+      if (!acc[demande.stagiaire.id] || acc[demande.stagiaire.id].created_at < demande.created_at) {
         acc[demande.stagiaire.id] = demande;
       }
       return acc;
@@ -131,7 +144,7 @@ function ListStagiaires({darkMode}) {
     const filteredDemandesBysomething = filteredDemandes.filter(demande =>
     (!filterType || demande.typeDemande === filterType) &&
     (!filterStatus || demande.status === filterStatus)
-  ).sort((a, b) => new Date(b.dateSoumission) - new Date(a.dateSoumission));
+  ).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   // Calculate indexes for pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -222,7 +235,7 @@ function ListStagiaires({darkMode}) {
                       <FontAwesomeIcon icon={faEye} className="mr-2" />
                       Afficher
                     </button>
-                    <button onClick={() => handleDelete(s.id)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-[48%]" style={{ fontSize: '0.8rem' }}>
+                    <button onClick={() => openDeleteModal(s)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-[48%]" style={{ fontSize: '0.8rem' }}>
                       <FontAwesomeIcon icon={faTrash} className="mr-2" />
                       Supprimer</button>
                   </td>
@@ -280,6 +293,34 @@ function ListStagiaires({darkMode}) {
             </div>
           </div>
         )}
+        {selectedDemandeDelete && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className={`${darkMode ? 'dark bg-gray-800 text-white' : 'bg-white'} p-8 rounded-lg shadow-lg w-full max-w-lg relative`}>
+              <button onClick={closeDeleteModal} className="absolute top-2 right-2">
+                <span title="Fermer">
+                  <XIcon className="h-8 w-8 text-red-500 hover:text-red-700" aria-hidden="true" />
+                </span>
+              </button>
+              <h2 className="text-xl font-bold mb-4">{selectedDemandeDelete.stagiaire.nom + ' ' + selectedDemandeDelete.stagiaire.prenom}</h2>
+              <p><strong>CIN :</strong> {selectedDemandeDelete.stagiaire.CIN}</p>
+              <p><strong>Filière :</strong> {selectedDemandeDelete.stagiaire.filiere}</p>
+              <p><strong>Groupe :</strong> {selectedDemandeDelete.stagiaire.groupe}</p>
+              <p><strong>Année Scolaire :</strong> {selectedDemandeDelete.stagiaire.anneeScolaire}</p>
+              <h3 className="text-lg font-semibold mt-4 mb-2">Demandes :</h3>
+              {history.map((demande, index) => (
+                <div key={index} className={`${getBackgroundColor(demande.typeDemande)} p-4 rounded-lg mb-4`}>
+                  <div className="flex justify-between">
+                    <div>
+                      <p><strong>Date de Soumission :</strong> {formatDate(demande.dateSoumission)}</p>
+                      <p><strong>Type de demande :</strong> {demande.typeDemande}</p>
+                    </div>
+                    <button onClick={() => handleDelete(demande.id,selectedDemandeDelete)} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-[10%]" style={{ fontSize: '0.8rem' }}>
+                      <FontAwesomeIcon icon={faTrash} className="text-sm" />
+                      </button>
+                  </div>
+                </div>
+              ))}
+              </div></div>)}
       </div>
     </div>
   );
