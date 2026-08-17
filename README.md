@@ -1,6 +1,6 @@
 # 🎓 Gestion des demandes — ISTA Hay Salam
+Application web Full Stack permettant de **digitaliser et gérer les demandes administratives** des étudiants de l'ISTA Hay Salam.
 
-## 📸 Captures d'écran
 
 ![](1.jpeg)
 ![](2.jpeg)
@@ -8,8 +8,6 @@
 ![](4.jpeg)
 ![](5.jpeg)
 ![](6.jpeg)
-
-Application web Full Stack permettant de **digitaliser et gérer les demandes administratives** des étudiants de l'ISTA Hay Salam.
 
 ---
 
